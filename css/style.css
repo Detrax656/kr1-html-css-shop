@@ -41,6 +41,14 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+:target {
+  outline: 2px dashed var(--color-primary);
+  outline-offset: 4px;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -98,7 +106,7 @@ a:focus-visible {
 }
 
 /* ===============================
-   4. Шапка, меню и подвал (Flexbox)
+   4.Flexbox
    =============================== */
 
 .site-header,
@@ -197,7 +205,7 @@ a:focus-visible {
   background-color: var(--color-surface);
 }
 
-/* Позиционирование: fixed — кнопка «Наверх» прикреплена к окну */
+/* Позиционирование: fixed — кнопка Наверх прикреплена к окну */
 .to-top {
   position: fixed;
   right: var(--space-lg);
@@ -288,3 +296,23 @@ a:focus-visible {
   border-left: 4px solid var(--color-success);
   background-color: var(--color-success-bg);
 }
+
+/* ===============================
+   7. Стили для Breadcrumbs
+   =============================== */
+.breadcrumbs {
+  max-width: var(--container-width);
+  margin: 0 auto var(--space-md);
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.breadcrumbs a {
+  color: var(--color-primary);
+}
+
+.breadcrumbs span::before {
+  content: " / ";
+  color: var(--color-muted);
+}
+    
