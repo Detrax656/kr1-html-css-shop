@@ -95,6 +95,26 @@ a:focus-visible {
   background-color: var(--color-primary-dark);
 }
 
+.button--primary {
+  color: var(--color-white);
+  background-color: var(--color-primary);
+}
+
+.button--primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.button--secondary {
+  color: var(--color-primary);
+  background-color: transparent;
+  border: 1px solid var(--color-primary);
+}
+
+.button--secondary:hover {
+  color: var(--color-white);
+  background-color: var(--color-primary);
+}
+
 .button:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 3px;
@@ -111,7 +131,6 @@ a:focus-visible {
 
 .site-header,
 .site-footer {
-  padding: var(--space-lg);
   background-color: var(--color-surface);
 }
 
@@ -123,10 +142,12 @@ a:focus-visible {
   gap: var(--space-md);
   max-width: var(--container-width);
   margin: 0 auto;
+  padding: var(--space-lg);
 }
 
 .site-header__logo {
-  font-weight: bold;
+  font-weight: 700;
+  color: var(--color-text);
   text-decoration: none;
 }
 
@@ -142,7 +163,7 @@ a:focus-visible {
   list-style: none;
 }
 
-.site-nav__list a {
+.site-nav__link {
   display: inline-block;
   padding: var(--space-sm) var(--space-md);
   color: var(--color-primary);
@@ -150,7 +171,17 @@ a:focus-visible {
   border-radius: var(--radius-sm);
 }
 
-.site-nav__list a:hover {
+.site-nav__link:hover {
+  color: var(--color-white);
+  background-color: var(--color-primary);
+}
+
+.site-nav__link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.site-nav__link--active {
   color: var(--color-white);
   background-color: var(--color-primary);
 }
@@ -177,11 +208,6 @@ a:focus-visible {
 }
 
 /* Grid: карточки товаров в адаптивной сетке */
-.product-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
-}
 
 .products-grid {
   display: grid;
@@ -206,11 +232,34 @@ a:focus-visible {
   border-color: var(--color-primary);
 }
 
-.product-card__title {
-  margin-top: 0;
+.product-card--featured {
+  border-color: var(--color-primary);
 }
 
-.product-card .button {
+.product-card--discount {
+  border-color: var(--color-danger);
+}
+
+.product-card__title {
+  margin-top: 0;
+  color: var(--color-text);
+}
+
+.product-card__description {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.product-card__price {
+  margin: 0;
+  font-weight: 700;
+}
+
+.product-card--discount .product-card__price {
+  color: var(--color-danger);
+}
+
+.product-card__button {
   margin-top: auto;
   align-self: flex-start;
 }
@@ -293,16 +342,18 @@ a:focus-visible {
   margin-top: 0;
 }
 
-.form-field {
+.order-form__field {
   margin-bottom: var(--space-md);
 }
 
-.form-field__label {
+.order-form__label {
   display: block;
   margin-bottom: var(--space-xs);
 }
 
-.form-field__control {
+.order-form__input,
+.order-form__select,
+.order-form__textarea {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid var(--color-border);
@@ -310,7 +361,20 @@ a:focus-visible {
   font: inherit;
 }
 
-.form-field__control[type="checkbox"] {
+.order-form__input:hover,
+.order-form__select:hover,
+.order-form__textarea:hover {
+  border-color: var(--color-primary);
+}
+
+.order-form__input:focus-visible,
+.order-form__select:focus-visible,
+.order-form__textarea:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.order-form__input[type="checkbox"] {
   width: auto;
 }
 
@@ -320,24 +384,16 @@ a:focus-visible {
   color: var(--color-muted);
 }
 
-.form-field__control:hover {
-  border-color: var(--color-primary);
-}
-
-.form-field__control:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 3px;
-}
-
 [aria-invalid="true"] {
   border-color: var(--color-danger);
 }
 
 /* Flexbox: кнопки формы справа */
-.form-actions {
+.order-form__actions {
   display: flex;
   justify-content: flex-end;
-  gap: var(--space-sm);
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
 }
 
 .success-message {
@@ -389,11 +445,11 @@ a:focus-visible {
   color: var(--color-muted);
 }
 
-.breadcrumbs a {
+.breadcrumbs__link {
   color: var(--color-primary);
 }
 
-.breadcrumbs span::before {
+.breadcrumbs__current::before {
   content: " / ";
   color: var(--color-muted);
 }

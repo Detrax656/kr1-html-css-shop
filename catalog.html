@@ -12,27 +12,37 @@
   <meta property="og:image" content="https://detrax656.github.io/kr1-html-css-shop/images/preview.jpg">
 </head>
 <body>
-  <header>
-    <div class="site-header">
-      <a class="site-logo" href="index.html">ShopProject</a>
-
-      <nav class="site-nav" aria-label="Основная навигация">
-        <ul class="site-nav__list">
-          <li><a href="index.html">Главная</a></li>
-          <li><a href="catalog.html">Каталог</a></li>
-          <li><a href="contacts.html">Контакты</a></li>
-          <li><a href="index.html#advantages">Преимущества</a></li>
-          <li><a href="index.html#popular">Популярные товары</a></li>
-          <li><a href="index.html#contacts">Обратная связь</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-header__logo" href="index.html">ShopProject</a>
+    
+        <nav class="site-nav" aria-label="Основная навигация">
+          <ul class="site-nav__list">
+            <li class="site-nav__item">
+              <a class="site-nav__link site-nav__link--active" href="index.html">
+                Главная
+              </a>
+            </li>
+            <li class="site-nav__item">
+              <a class="site-nav__link" href="catalog.html">Каталог</a>
+            </li>
+            <li class="site-nav__item">
+              <a class="site-nav__link" href="contacts.html">Контакты</a>
+            </li>
+            <li class="site-nav__item">
+              <a class="site-nav__link" href="index.html#popular">
+                Популярные товары
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
   <main>
     <nav class="breadcrumbs" aria-label="Хлебные крошки">
-      <a href="index.html">Главная</a>
-      <span>Каталог</span>
+      <a class="breadcrumbs__link" href="index.html">Главная</a>
+      <span class="breadcrumbs__current">Каталог</span>
     </nav>
 
     <section class="section">
@@ -85,25 +95,28 @@
         <h2 class="section__title">Список товаров</h2>
 
         <div class="products-grid">
-          <article class="product-card">
+          <article class="product-card product-card--featured">
             <h3 class="product-card__title">Товар 1</h3>
-            <p class="product-card__text">Краткое описание учебного товара.</p>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
             <p class="product-card__price">Цена: 1000 руб.</p>
             <a class="button" href="index.html#popular">Подробнее</a>
+            </button>
           </article>
-
-          <article class="product-card">
+          
+          <article class="product-card product-card--featured">
             <h3 class="product-card__title">Товар 2</h3>
-            <p class="product-card__text">Краткое описание учебного товара.</p>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
             <p class="product-card__price">Цена: 1500 руб.</p>
             <a class="button" href="index.html#popular">Подробнее</a>
+            </button>
           </article>
-
-          <article class="product-card">
+          
+          <article class="product-card product-card--featured">
             <h3 class="product-card__title">Товар 3</h3>
-            <p class="product-card__text">Краткое описание учебного товара.</p>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
             <p class="product-card__price">Цена: 2000 руб.</p>
             <a class="button" href="index.html#popular">Подробнее</a>
+            </button>
           </article>
         </div>
       </section>
