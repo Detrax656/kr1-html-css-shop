@@ -10,23 +10,25 @@ const closeDialogButton = document.getElementById('close-order-dialog');
 // Получаем скрытое поле, в которое будет записан выбранный товар.
 const selectedProductInput = document.getElementById('selected-product');
 
-// Перебираем все кнопки «Заказать».
-orderButtons.forEach((button) => {
-  button.addEventListener('click', () => {
+// Модальное окно есть только на главной странице, на order.html его нет.
+if (orderDialog) {
+  // Перебираем все кнопки «Заказать».
+  orderButtons.forEach((button) => {
+    button.addEventListener('click', () => {
 
-    const productName = button.dataset.product;
+      const productName = button.dataset.product;
 
-    selectedProductInput.value = productName;
+      selectedProductInput.value = productName;
 
-    
-    orderDialog.showModal();
+      orderDialog.showModal();
+    });
   });
-});
 
-// Закрываем модальное окно по кнопке «Закрыть».
-closeDialogButton.addEventListener('click', () => {
-  orderDialog.close();
-});
+  // Закрываем модальное окно по кнопке «Закрыть».
+  closeDialogButton.addEventListener('click', () => {
+    orderDialog.close();
+  });
+}
 
 // Получаем форму заявки.
 const orderForm = document.getElementById('order-form');
@@ -65,5 +67,8 @@ orderForm.addEventListener('submit', (event) => {
 
   orderForm.reset();
 
-  orderDialog.close();
+  // Закрываем окно только там, где оно есть.
+  if (orderDialog) {
+    orderDialog.close();
+  }
 });
