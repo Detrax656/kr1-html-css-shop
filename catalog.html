@@ -57,9 +57,9 @@
     <section class="section">
       <h1>Каталог товаров</h1>
       <p>
-        На этой странице представлен учебный каталог товаров.
-        В дальнейшем здесь будут добавлены фильтры, сортировка и более
-        подробные карточки.
+        На этой странице представлен учебный каталог товаров с фильтрами.
+        Карточки бывают нескольких видов: новинки, хиты, скидки и товары,
+        которых нет в наличии.
       </p>
     
     <section class="catalog-layout">
@@ -84,6 +84,11 @@
               <input type="checkbox" name="category" value="new">
               Новинки
             </label>
+
+            <label class="catalog-filters__label">
+              <input type="checkbox" name="category" value="sale">
+              Акции
+            </label>
           </fieldset>
 
           <fieldset class="catalog-filters__group">
@@ -107,24 +112,79 @@
           <article class="product-card product-card--new">
             <span class="product-card__badge">Новинка</span>
             <h3 class="product-card__title">Товар 1</h3>
+            <p class="product-card__category">Категория: Новинки</p>
             <p class="product-card__description">Краткое описание учебного товара.</p>
             <p class="product-card__price">Цена: 1000 руб.</p>
             <a class="button product-card__button" href="product.html">Подробнее</a>
           </article>
-          
+
           <article class="product-card product-card--hit">
             <span class="product-card__badge">Хит</span>
             <h3 class="product-card__title">Товар 2</h3>
+            <p class="product-card__category">Категория: Популярные</p>
             <p class="product-card__description">Краткое описание учебного товара.</p>
             <p class="product-card__price">Цена: 1500 руб.</p>
             <a class="button product-card__button" href="product.html">Подробнее</a>
           </article>
-          
+
           <article class="product-card product-card--discount">
             <span class="product-card__badge">Скидка</span>
             <h3 class="product-card__title">Товар 3</h3>
+            <p class="product-card__category">Категория: Акции</p>
             <p class="product-card__description">Краткое описание учебного товара.</p>
             <p class="product-card__price">Цена: 2000 руб.</p>
+            <a class="button product-card__button" href="product.html">Подробнее</a>
+          </article>
+
+          <article class="product-card product-card--new">
+            <span class="product-card__badge">Новинка</span>
+            <h3 class="product-card__title">Товар 4</h3>
+            <p class="product-card__category">Категория: Новинки</p>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 2500 руб.</p>
+            <a class="button product-card__button" href="product.html">Подробнее</a>
+          </article>
+
+          <article class="product-card product-card--hit">
+            <span class="product-card__badge">Хит</span>
+            <h3 class="product-card__title">Товар 5</h3>
+            <p class="product-card__category">Категория: Популярные</p>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 3000 руб.</p>
+            <a class="button product-card__button" href="product.html">Подробнее</a>
+          </article>
+
+          <article class="product-card product-card--discount">
+            <span class="product-card__badge">Скидка</span>
+            <h3 class="product-card__title">Товар 6</h3>
+            <p class="product-card__category">Категория: Акции</p>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 6700 руб.</p>
+            <a class="button product-card__button" href="product.html">Подробнее</a>
+          </article>
+
+          <article class="product-card">
+            <h3 class="product-card__title">Товар 7</h3>
+            <p class="product-card__category">Категория: Учебные товары</p>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 4000 руб.</p>
+            <a class="button product-card__button" href="product.html">Подробнее</a>
+          </article>
+
+          <article class="product-card product-card--unavailable">
+            <span class="product-card__badge">Нет в наличии</span>
+            <h3 class="product-card__title">Товар 8</h3>
+            <p class="product-card__category">Категория: Учебные товары</p>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 4500 руб.</p>
+            <button class="button product-card__button" type="button" disabled>Недоступно</button>
+          </article>
+
+          <article class="product-card">
+            <h3 class="product-card__title">Товар 9</h3>
+            <p class="product-card__category">Категория: Учебные товары</p>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 9999 руб.</p>
             <a class="button product-card__button" href="product.html">Подробнее</a>
           </article>
         </div>
@@ -137,5 +197,8 @@
     <p class="site-footer__text">&copy; 2026 Учебный проект. Все права защищены.</p>
     <p class="site-footer__text">Дисциплина: Фронтенд и бэкенд разработка</p>
   </footer>
+
+  <a class="to-top" href="#">Наверх</a>
+
 </body>
 </html>

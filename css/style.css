@@ -244,9 +244,19 @@ a:focus-visible {
   border-color: var(--color-danger);
 }
 
+.product-card--unavailable {
+  background-color: var(--color-surface);
+}
+
 .product-card__title {
   margin-top: 0;
   color: var(--color-text);
+}
+
+.product-card__category {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-muted);
 }
 
 .product-card__description {
@@ -261,6 +271,10 @@ a:focus-visible {
 
 .product-card--discount .product-card__price {
   color: var(--color-danger);
+}
+
+.product-card--unavailable .product-card__price {
+  color: var(--color-muted);
 }
 
 .product-card__button {
@@ -286,6 +300,10 @@ a:focus-visible {
 
 .product-card--discount .product-card__badge {
   background-color: var(--color-danger);
+}
+
+.product-card--unavailable .product-card__badge {
+  background-color: var(--color-muted);
 }
 
 .aside-info {
@@ -358,6 +376,33 @@ a:focus-visible {
 
 .order-dialog__title {
   margin-top: 0;
+}
+
+/* Позиционирование: absolute — крестик в углу окна */
+.order-dialog__close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--color-muted);
+  background-color: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.order-dialog__close:hover {
+  color: var(--color-text);
+  background-color: var(--color-surface);
+}
+
+.order-dialog__close:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
 }
 
 .order-form {
@@ -523,17 +568,48 @@ a:focus-visible {
    9. Страница товара
    =============================== */
 
+/* Grid: картинка и информация о товаре в две колонки */
+.product-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
 .product-details__image {
   display: block;
   width: 100%;
-  max-width: 480px;
   height: auto;
-  margin-bottom: var(--space-md);
   border-radius: var(--radius-md);
+}
+
+.product-details__title {
+  margin-top: 0;
+}
+
+.product-details__category {
+  margin: 0 0 var(--space-md);
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.product-details__subtitle {
+  margin: var(--space-md) 0 var(--space-sm);
+  font-size: 18px;
+}
+
+.product-details__list {
+  margin: 0 0 var(--space-md);
+  padding-left: var(--space-lg);
 }
 
 .product-details__price {
   font-weight: 700;
+}
+
+.product-details__availability {
+  font-weight: 700;
+  color: var(--color-success);
 }
 
 .product-table {
@@ -557,4 +633,37 @@ a:focus-visible {
 
 .product-table__heading {
   background-color: var(--color-surface);
+}
+
+/* ===============================
+   10. Отзывы
+   =============================== */
+
+/* Grid: карточки отзывов в три колонки */
+.reviews {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.review-card {
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.review-card__rating {
+  margin: 0 0 var(--space-sm);
+  color: var(--color-primary);
+}
+
+.review-card__text {
+  margin: 0 0 var(--space-sm);
+  color: var(--color-muted);
+}
+
+.review-card__author {
+  margin: 0;
+  font-weight: 700;
 }
