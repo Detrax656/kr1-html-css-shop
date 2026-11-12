@@ -1,52 +1,55 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Карточка товара учебного интернет-магазина.">
   <title>Карточка товара — Учебный интернет-магазин</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Учебный интернет-магазин">
   <meta property="og:description" content="Учебный frontend-проект интернет-магазина.">
   <meta property="og:image" content="https://detrax656.github.io/kr1-html-css-shop/images/product-placeholder.jpg">
 </head>
+
 <body>
-        <header class="site-header">
-          <div class="site-header__inner">
-            <a class="site-header__logo" href="index.html">ShopProject</a>
-        
-            <nav class="site-nav" aria-label="Основная навигация">
-              <ul class="site-nav__list">
-                <li class="site-nav__item">
-                  <a class="site-nav__link" href="index.html">
-                    Главная
-                  </a>
-                </li>
-                <li class="site-nav__item">
-                  <a class="site-nav__link" href="catalog.html">Каталог</a>
-                </li>
-                <li class="site-nav__item">
-                  <a class="site-nav__link site-nav__link--active" href="product.html">Товар</a>
-                </li>
-                <li class="site-nav__item">
-                  <a class="site-nav__link" href="order.html">Заказ</a>
-                </li>
-                <li class="site-nav__item">
-                  <a class="site-nav__link" href="contacts.html">Контакты</a>
-                </li>
-                <li class="site-nav__item">
-                  <a class="site-nav__link" href="index.html#popular">
-                    Популярные товары
-                  </a>
-                </li>
-                <li class="site-nav__item">
-                  <a class="site-nav__link" href="index.html#advantages">Преимущества</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </header>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-header__logo" href="index.html">ShopProject</a>
+
+      <nav class="site-nav" aria-label="Основная навигация">
+        <ul class="site-nav__list">
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="index.html">
+              Главная
+            </a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="catalog.html">Каталог</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link site-nav__link--active" href="product.html">Товар</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="order.html">Заказ</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="contacts.html">Контакты</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="index.html#popular">
+              Популярные товары
+            </a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="index.html#advantages">Преимущества</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <main>
     <nav class="breadcrumbs" aria-label="Хлебные крошки">
@@ -57,8 +60,19 @@
 
     <section class="section">
       <article class="product-details">
-        <img class="product-details__image" src="images/product-placeholder.jpg" alt="Изображение товара 1">
-
+        <img 
+        class="product-details__image" 
+        src="images/product-placeholder.jpg" 
+        srcset="images/product-placeholder.jpg 480w,"
+        sizes="(max-width: 639px) 100vw,
+            (max-width: 1023px) 50vw,
+            33vw"
+        alt="Товар 1"
+        width="640"
+        height="480"
+        loading="lazy"
+        class="product-card__image"
+        
         <div class="product-details__info">
           <h1 class="product-details__title">Товар 1</h1>
           <p class="product-details__category">Категория: Новинки</p>
@@ -131,13 +145,15 @@
 
         <article class="review-card">
           <p class="review-card__rating" role="img" aria-label="Оценка: 4 из 5">★★★★☆</p>
-          <blockquote class="review-card__text">Лампа прекарсная,светит хорошо ,может даже слишком хорошо, я слегка ослеп</blockquote>
+          <blockquote class="review-card__text">Лампа прекарсная,светит хорошо ,может даже слишком хорошо, я слегка
+            ослеп</blockquote>
           <p class="review-card__author">Покупатель 2</p>
         </article>
 
         <article class="review-card">
           <p class="review-card__rating" role="img" aria-label="Оценка: 5 из 5">★★★★★</p>
-          <blockquote class="review-card__text">Лампа великолепны когда жена увидел своими глаза не поверил магия свет красиво  </blockquote>
+          <blockquote class="review-card__text">Лампа великолепны когда жена увидел своими глаза не поверил магия свет
+            красиво </blockquote>
           <p class="review-card__author">Покупатель 3</p>
         </article>
       </div>
@@ -147,32 +163,32 @@
       <h2 class="section__title">Похожие товары</h2>
 
       <div class="products-grid">
-      <article class="product-card product-card--hit">
-        <span class="product-card__badge">Хит</span>
-        <h3 class="product-card__title">Товар 2</h3>
-        <p class="product-card__category">Категория: Популярные</p>
-        <p class="product-card__description">Краткое описание учебного товара.</p>
-        <p class="product-card__price">Цена: 1500 руб.</p>
-        <a class="button product-card__button" href="product.html">Подробнее</a>
-      </article>
+        <article class="product-card product-card--hit">
+          <span class="product-card__badge">Хит</span>
+          <h3 class="product-card__title">Товар 2</h3>
+          <p class="product-card__category">Категория: Популярные</p>
+          <p class="product-card__description">Краткое описание учебного товара.</p>
+          <p class="product-card__price">Цена: 1500 руб.</p>
+          <a class="button product-card__button" href="product.html">Подробнее</a>
+        </article>
 
-      <article class="product-card product-card--discount">
-        <span class="product-card__badge">Скидка</span>
-        <h3 class="product-card__title">Товар 3</h3>
-        <p class="product-card__category">Категория: Акции</p>
-        <p class="product-card__description">Краткое описание учебного товара.</p>
-        <p class="product-card__price">Цена: 2000 руб.</p>
-        <a class="button product-card__button" href="product.html">Подробнее</a>
-      </article>
+        <article class="product-card product-card--discount">
+          <span class="product-card__badge">Скидка</span>
+          <h3 class="product-card__title">Товар 3</h3>
+          <p class="product-card__category">Категория: Акции</p>
+          <p class="product-card__description">Краткое описание учебного товара.</p>
+          <p class="product-card__price">Цена: 2000 руб.</p>
+          <a class="button product-card__button" href="product.html">Подробнее</a>
+        </article>
 
-      <article class="product-card product-card--new">
-        <span class="product-card__badge">Новинка</span>
-        <h3 class="product-card__title">Товар 4</h3>
-        <p class="product-card__category">Категория: Новинки</p>
-        <p class="product-card__description">Краткое описание учебного товара.</p>
-        <p class="product-card__price">Цена: 2500 руб.</p>
-        <a class="button product-card__button" href="product.html">Подробнее</a>
-      </article>
+        <article class="product-card product-card--new">
+          <span class="product-card__badge">Новинка</span>
+          <h3 class="product-card__title">Товар 4</h3>
+          <p class="product-card__category">Категория: Новинки</p>
+          <p class="product-card__description">Краткое описание учебного товара.</p>
+          <p class="product-card__price">Цена: 2500 руб.</p>
+          <a class="button product-card__button" href="product.html">Подробнее</a>
+        </article>
       </div>
     </section>
   </main>
@@ -185,4 +201,5 @@
   <a class="to-top" href="#">Наверх</a>
 
 </body>
+
 </html>

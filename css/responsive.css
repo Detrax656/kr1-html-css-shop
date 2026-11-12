@@ -1,0 +1,109 @@
+/*
+  Адаптивные стили
+  Подход: Mobile First
+  Базовые стили рассчитаны на мобильный экран.
+*/
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.container,
+.main,
+.section {
+    width: min(100% - 32px, 1200px);
+    margin-inline: auto;
+}
+
+.section {
+    padding-block: clamp(24px, 5vw, 64px);
+}
+
+@media (min-width: 768px) {
+    .site-nav__list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
+  }
+}
+
+.product-card__title,
+.product-card__description {
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 640px) {
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .products-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.catalog-filters {
+  order: -1;
+}
+
+@media (min-width: 1024px) {
+  .catalog-layout {
+    grid-template-columns: 280px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .catalog-filters {
+    position: sticky;
+    top: 88px;
+    order: initial;
+    z-index: 1;
+    align-self: start;
+  }
+}
+
+@media (min-width: 768px) {
+  .order-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .order-form__group--wide {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 768px) {
+  .back-to-top {
+    right: 32px;
+    bottom: 32px;
+  }
+}
