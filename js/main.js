@@ -76,39 +76,41 @@ if (orderDialog) {
 }
 
 // Обрабатываем отправку формы.
-orderForm.addEventListener('submit', (event) => {
+if (orderForm) {
+  orderForm.addEventListener('submit', (event) => {
 
-  event.preventDefault();
+    event.preventDefault();
 
-  const formElements = Array.from(orderForm.elements);
+    const formElements = Array.from(orderForm.elements);
 
-  formElements.forEach((element) => {
-    if (element.willValidate) {
-      element.removeAttribute('aria-invalid');
-    }
-  });
-
-  // Проверяем встроенные HTML-ограничения формы.
-  if (!orderForm.checkValidity()) {
     formElements.forEach((element) => {
-      if (element.willValidate && !element.checkValidity()) {
-        element.setAttribute('aria-invalid', 'true');
+      if (element.willValidate) {
+        element.removeAttribute('aria-invalid');
       }
     });
 
-    // Показываем стандартные сообщения браузера.
-    orderForm.reportValidity();
-    return;
-  }
+    // Проверяем встроенные HTML-ограничения формы.
+    if (!orderForm.checkValidity()) {
+      formElements.forEach((element) => {
+        if (element.willValidate && !element.checkValidity()) {
+          element.setAttribute('aria-invalid', 'true');
+        }
+      });
 
-  // Показываем сообщение об успешной отправке.
-  successMessage.hidden = false;
+      // Показываем стандартные сообщения браузера.
+      orderForm.reportValidity();
+      return;
+    }
 
-  orderForm.reset();
+    // Показываем сообщение об успешной отправке.
+    successMessage.hidden = false;
 
-  // В модальном окне сообщение показывается вместо формы.
-  // На странице order.html форма остаётся на месте.
-  if (orderDialog) {
-    orderForm.hidden = true;
-  }
-});
+    orderForm.reset();
+
+    // В модальном окне сообщение показывается вместо формы.
+    // На странице order.html форма остаётся на месте.
+    if (orderDialog) {
+      orderForm.hidden = true;
+    }
+  });
+}

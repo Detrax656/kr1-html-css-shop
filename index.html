@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Главная страница учебного интернет-магазина.">
-    <title>Учебный интернет-магазин</title>
+    <meta name="description" content="Накал — магазин дизайнерских ламп. Главная страница учебного проекта.">
+    <title>Накал — магазин дизайнерских ламп</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <script src="js/main.js" defer></script>
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Учебный интернет-магазин">
-    <meta property="og:description" content="Учебный frontend-проект интернет-магазина.">
+    <meta property="og:title" content="Накал — магазин дизайнерских ламп">
+    <meta property="og:description" content="Учебный frontend-проект: магазин дизайнерских ламп «Накал».">
     <meta property="og:image" content="https://detrax656.github.io/kr1-html-css-shop/images/preview.jpg">
 </head>
 
@@ -19,12 +19,12 @@
     <a class="skip-link" href="#main">Перейти к основному содержимому</a>
     <header class="site-header">
         <div class="site-header__inner">
-            <a class="site-header__logo" href="index.html">ShopProject</a>
+            <a class="site-header__logo" href="index.html">Накал</a>
 
             <nav class="site-nav" aria-label="Основная навигация">
                 <ul class="site-nav__list">
                     <li class="site-nav__item">
-                        <a class="site-nav__link site-nav__link--active" href="index.html">
+                        <a class="site-nav__link site-nav__link--active" href="index.html" aria-current="page">
                             Главная
                         </a>
                     </li>
@@ -55,13 +55,21 @@
 
     <main>
         <section class="hero">
-            <h1 class="hero__title">Учебный интернет-магазин</h1>
-            <p class="hero__text">
-                Это стартовая страница учебного frontend-проекта.
-                В дальнейшем на её основе будет разработан многостраничный сайт
-                интернет-магазина или каталога услуг.
-            </p>
-            <a class="button" href="#popular">Перейти к товарам</a>
+            <div class="hero__content">
+                <h1 class="hero__title">Накал: магазин дизайнерских ламп</h1>
+                <p class="hero__text">
+                    Это стартовая страница учебного frontend-проекта: магазина дизайнерских ламп.
+                    Здесь будут настольные лампы, торшеры и подвесные светильники.
+                </p>
+                <a class="button" href="#popular">Перейти к товарам</a>
+            </div>
+
+            <picture>
+                <source media="(min-width: 1200px)" srcset="images/hero-desktop.jpg">
+                <source media="(min-width: 768px)" srcset="images/hero-tablet.jpg">
+                <img class="hero__image" src="images/hero-mobile.jpg" alt="Дизайнерская лампа (заглушка изображения)"
+                    width="640" height="480">
+            </picture>
         </section>
 
         <section class="section" id="advantages">
@@ -81,6 +89,10 @@
             <div class="products-grid">
                 <article class="product-card product-card--new">
                     <span class="product-card__badge">Новинка</span>
+                    <img class="product-card__image" src="images/product-640.jpg"
+                      srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                      sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                      alt="Товар 1: фото товара" width="640" height="480" loading="lazy">
                     <h3 class="product-card__title">Товар 1</h3>
                     <p class="product-card__category">Категория: Новинки</p>
                     <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -92,6 +104,10 @@
 
                 <article class="product-card product-card--hit">
                     <span class="product-card__badge">Хит</span>
+                    <img class="product-card__image" src="images/product-640.jpg"
+                      srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                      sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                      alt="Товар 2: фото товара" width="640" height="480" loading="lazy">
                     <h3 class="product-card__title">Товар 2</h3>
                     <p class="product-card__category">Категория: Популярные</p>
                     <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -103,6 +119,10 @@
 
                 <article class="product-card product-card--discount">
                     <span class="product-card__badge">Скидка</span>
+                    <img class="product-card__image" src="images/product-640.jpg"
+                      srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                      sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                      alt="Товар 3: фото товара" width="640" height="480" loading="lazy">
                     <h3 class="product-card__title">Товар 3</h3>
                     <p class="product-card__category">Категория: Акции</p>
                     <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -154,7 +174,7 @@
     </main>
 
     <footer class="site-footer" id="contacts">
-        <p class="site-footer__text">&copy; 2026 Учебный проект. Все права защищены.</p>
+        <p class="site-footer__text">&copy; 2026 Накал, магазин дизайнерских ламп. Учебный проект. Все права защищены.</p>
         <p class="site-footer__text">Дисциплина: Фронтенд и бэкенд разработка</p>
     </footer>
 
@@ -173,31 +193,31 @@
         <form class="order-form" id="order-form" action="#" method="post" novalidate>
             <input id="selected-product" name="selected-product" type="hidden">
 
-            <div class="order-form__field">
+            <div class="order-form__group">
                 <label class="order-form__label" for="order-name">Имя</label>
                 <input class="order-form__input" id="order-name" name="name" type="text" placeholder="Введите ваше имя"
                     minlength="2" autocomplete="given-name" required>
             </div>
 
-            <div class="order-form__field">
+            <div class="order-form__group">
                 <label class="order-form__label" for="order-email">E-mail</label>
                 <input class="order-form__input" id="order-email" name="email" type="email"
                     placeholder="example@mail.ru" autocomplete="email" required>
             </div>
 
-            <div class="order-form__field">
+            <div class="order-form__group">
                 <label class="order-form__label" for="order-phone">Телефон</label>
                 <input class="order-form__input" id="order-phone" name="phone" type="tel" inputmode="tel"
                     placeholder="+7 (900) 000-00-00" pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" required>
                 <small class="order-form__hint">Формат: +7 (900) 000-00-00</small>
             </div>
 
-            <div class="order-form__field">
+            <div class="order-form__group">
                 <label class="order-form__label" for="order-date">Дата связи</label>
                 <input class="order-form__input" id="order-date" name="date" type="date">
             </div>
 
-            <div class="order-form__field">
+            <div class="order-form__group">
                 <label class="order-form__label" for="order-topic">Тема заявки</label>
                 <select class="order-form__select" id="order-topic" name="topic" required>
                     <option value="">Выберите тему</option>
@@ -207,13 +227,13 @@
                 </select>
             </div>
 
-            <div class="order-form__field">
+            <div class="order-form__group order-form__group--wide">
                 <label class="order-form__label" for="order-comment">Комментарий</label>
                 <textarea class="order-form__textarea" id="order-comment" name="comment" rows="4"
                     placeholder="Укажите дополнительную информацию"></textarea>
             </div>
 
-            <div class="order-form__field order-form__field--checkbox">
+            <div class="order-form__group order-form__group--wide order-form__group--checkbox">
                 <label class="order-form__label">
                     <input class="order-form__input" id="order-agreement" name="agreement" type="checkbox" required>
                     Я согласен на обработку данных

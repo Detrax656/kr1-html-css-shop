@@ -4,20 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Каталог товаров учебного интернет-магазина.">
-  <title>Каталог товаров — Учебный интернет-магазин</title>
+  <meta name="description" content="Каталог товаров магазина ламп «Накал».">
+  <title>Каталог товаров — Накал</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Учебный интернет-магазин">
-  <meta property="og:description" content="Учебный frontend-проект интернет-магазина.">
+  <meta property="og:title" content="Накал — магазин дизайнерских ламп">
+  <meta property="og:description" content="Учебный frontend-проект: магазин дизайнерских ламп «Накал».">
   <meta property="og:image" content="https://detrax656.github.io/kr1-html-css-shop/images/preview.jpg">
 </head>
 
 <body>
   <header class="site-header">
     <div class="site-header__inner">
-      <a class="site-header__logo" href="index.html">ShopProject</a>
+      <a class="site-header__logo" href="index.html">Накал</a>
 
       <nav class="site-nav" aria-label="Основная навигация">
         <ul class="site-nav__list">
@@ -27,7 +27,7 @@
             </a>
           </li>
           <li class="site-nav__item">
-            <a class="site-nav__link site-nav__link--active" href="catalog.html">Каталог</a>
+            <a class="site-nav__link site-nav__link--active" href="catalog.html" aria-current="page">Каталог</a>
           </li>
           <li class="site-nav__item">
             <a class="site-nav__link" href="product.html">Товар</a>
@@ -54,7 +54,7 @@
   <main>
     <nav class="breadcrumbs" aria-label="Хлебные крошки">
       <a class="breadcrumbs__link" href="index.html">Главная</a>
-      <span class="breadcrumbs__current">Каталог</span>
+      <span class="breadcrumbs__current" aria-current="page">Каталог</span>
     </nav>
 
     <section class="section">
@@ -116,6 +116,10 @@
           <div class="products-grid">
             <article class="product-card product-card--new">
               <span class="product-card__badge">Новинка</span>
+              <img class="product-card__image" src="images/product-640.jpg"
+                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                alt="Товар 1: фото товара" width="640" height="480" loading="lazy">
               <h3 class="product-card__title">Товар 1</h3>
               <p class="product-card__category">Категория: Новинки</p>
               <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -125,6 +129,10 @@
 
             <article class="product-card product-card--hit">
               <span class="product-card__badge">Хит</span>
+              <img class="product-card__image" src="images/product-640.jpg"
+                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                alt="Товар 2: фото товара" width="640" height="480" loading="lazy">
               <h3 class="product-card__title">Товар 2</h3>
               <p class="product-card__category">Категория: Популярные</p>
               <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -134,6 +142,10 @@
 
             <article class="product-card product-card--discount">
               <span class="product-card__badge">Скидка</span>
+              <img class="product-card__image" src="images/product-640.jpg"
+                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                alt="Товар 3: фото товара" width="640" height="480" loading="lazy">
               <h3 class="product-card__title">Товар 3</h3>
               <p class="product-card__category">Категория: Акции</p>
               <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -143,6 +155,10 @@
 
             <article class="product-card product-card--new">
               <span class="product-card__badge">Новинка</span>
+              <img class="product-card__image" src="images/product-640.jpg"
+                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                alt="Товар 4: фото товара" width="640" height="480" loading="lazy">
               <h3 class="product-card__title">Товар 4</h3>
               <p class="product-card__category">Категория: Новинки</p>
               <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -152,6 +168,10 @@
 
             <article class="product-card product-card--hit">
               <span class="product-card__badge">Хит</span>
+              <img class="product-card__image" src="images/product-640.jpg"
+                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                alt="Товар 5: фото товара" width="640" height="480" loading="lazy">
               <h3 class="product-card__title">Товар 5</h3>
               <p class="product-card__category">Категория: Популярные</p>
               <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -161,6 +181,10 @@
 
             <article class="product-card product-card--discount">
               <span class="product-card__badge">Скидка</span>
+              <img class="product-card__image" src="images/product-640.jpg"
+                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                alt="Товар 6: фото товара" width="640" height="480" loading="lazy">
               <h3 class="product-card__title">Товар 6</h3>
               <p class="product-card__category">Категория: Акции</p>
               <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -169,6 +193,10 @@
             </article>
 
             <article class="product-card">
+              <img class="product-card__image" src="images/product-640.jpg"
+                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                alt="Товар 7: фото товара" width="640" height="480" loading="lazy">
               <h3 class="product-card__title">Товар 7</h3>
               <p class="product-card__category">Категория: Учебные товары</p>
               <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -178,6 +206,10 @@
 
             <article class="product-card product-card--new">
               <span class="product-card__badge">Новинка</span>
+              <img class="product-card__image" src="images/product-640.jpg"
+                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                alt="Товар 8: фото товара" width="640" height="480" loading="lazy">
               <h3 class="product-card__title">Товар 8</h3>
               <p class="product-card__category">Категория: Новинки</p>
               <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -187,6 +219,10 @@
 
             <article class="product-card product-card--unavailable">
               <span class="product-card__badge">Нет в наличии</span>
+              <img class="product-card__image" src="images/product-640.jpg"
+                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                alt="Товар 9: фото товара" width="640" height="480" loading="lazy">
               <h3 class="product-card__title">Товар 9</h3>
               <p class="product-card__category">Категория: Учебные товары</p>
               <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -196,6 +232,10 @@
 
             <article class="product-card product-card--unavailable">
               <span class="product-card__badge">Нет в наличии</span>
+              <img class="product-card__image" src="images/product-640.jpg"
+                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                alt="Товар 10: фото товара" width="640" height="480" loading="lazy">
               <h3 class="product-card__title">Товар 10</h3>
               <p class="product-card__category">Категория: Учебные товары</p>
               <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -204,6 +244,10 @@
             </article>
 
             <article class="product-card">
+              <img class="product-card__image" src="images/product-640.jpg"
+                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                alt="Товар 11: фото товара" width="640" height="480" loading="lazy">
               <h3 class="product-card__title">Товар 11</h3>
               <p class="product-card__category">Категория: Учебные товары</p>
               <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -213,6 +257,10 @@
 
             <article class="product-card product-card--unavailable">
               <span class="product-card__badge">Нет в наличии</span>
+              <img class="product-card__image" src="images/product-640.jpg"
+                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                alt="Товар 12: фото товара" width="640" height="480" loading="lazy">
               <h3 class="product-card__title">Товар 12</h3>
               <p class="product-card__category">Категория: Учебные товары</p>
               <p class="product-card__description">Краткое описание учебного товара.</p>
@@ -227,7 +275,7 @@
   </main>
 
   <footer class="site-footer">
-    <p class="site-footer__text">&copy; 2026 Учебный проект. Все права защищены.</p>
+    <p class="site-footer__text">&copy; 2026 Накал, магазин дизайнерских ламп. Учебный проект. Все права защищены.</p>
     <p class="site-footer__text">Дисциплина: Фронтенд и бэкенд разработка</p>
   </footer>
 
