@@ -262,6 +262,33 @@ if (pull) {
   updateRestTarget();
   REST = restTarget;
 
+  // Длина шнура с предыдущей страницы: начинаем с неё и плавно идём к нужной,
+  // чтобы лампочка не прыгала при переходе между страницами.
+  try {
+    const saved = Number(sessionStorage.getItem('cordRest'));
+
+    if (saved > 0 && !reduceMotion) {
+      REST = saved;
+    }
+  } catch (e) {
+    // sessionStorage недоступен — лампочка просто начнёт с нужной длины.
+  }
+
+  window.addEventListener('pagehide', () => {
+    try {
+      sessionStorage.setItem('cordRest', String(REST));
+    } catch (e) {
+      // ничего страшного
+    }
+  });
+
   pull.setAttribute('aria-pressed', String(root.dataset.theme === 'light'));
   draw();
+
+  // Показываем лампочку только после первой отрисовки, чтобы не мелькало неверное положение.
+  pull.classList.add('pull--ready');
+
+  if (REST !== restTarget) {
+    startLoop();
+  }
 }

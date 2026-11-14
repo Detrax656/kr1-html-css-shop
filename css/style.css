@@ -215,10 +215,15 @@ a:focus-visible {
 }
 
 .pull svg {
+  visibility: hidden;   /* до первой отрисовки скриптом */
   display: block;
   width: 100%;
   height: 100%;
   overflow: visible;
+}
+
+.pull--ready svg {
+  visibility: visible;
 }
 
 .pull__cord {
