@@ -4,54 +4,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Контактная информация магазина ламп «Накал».">
+  <meta name="description" content="Контакты магазина дизайнерских ламп «Накал»: адрес, телефон, график работы и карта проезда.">
   <title>Контакты — Накал</title>
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem('theme') || 'dark';
+    } catch (e) {}
+  </script>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/theme.js" defer></script>
   <meta property="og:type" content="website">
   <meta property="og:title" content="Накал — магазин дизайнерских ламп">
-  <meta property="og:description" content="Учебный frontend-проект: магазин дизайнерских ламп «Накал».">
+  <meta property="og:description" content="Дизайнерские настольные лампы, торшеры и подвесные светильники. Доставка по России.">
   <meta property="og:image" content="https://detrax656.github.io/kr1-html-css-shop/images/preview.jpg">
 </head>
 
 <body>
+  <a class="skip-link" href="#main">Перейти к основному содержимому</a>
   <header class="site-header">
     <div class="site-header__inner">
-      <a class="site-header__logo" href="index.html">Накал</a>
+      <button class="pull" id="pull" type="button" aria-label="Переключить тему оформления" aria-pressed="false">
+        <svg viewBox="0 0 60 330" aria-hidden="true" focusable="false">
+          <g id="swing">
+            <line class="pull__cord" id="cord" x1="30" y1="0" x2="30" y2="100"/>
+            <g id="bulb-group" transform="translate(30 100)">
+              <rect class="pull__socket" x="-6" y="0" width="12" height="14" rx="2"/>
+              <path class="pull__bulb" d="M-6 14 C-6 22 -14 26 -14 40 A14 14 0 0 0 14 40 C14 26 6 22 6 14 Z"/>
+              <g transform="translate(0 38)">
+                <circle class="pull__ring" r="22"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(0)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(45)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(90)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(135)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(180)"/>
+                <circle class="pull__hit" r="28"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </button>
+      <a class="site-header__logo" href="index.html"><svg class="site-header__mark" viewBox="0 0 40 48" width="30" height="36" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 2a16 16 0 0 0-9 29.2V36h18v-4.8A16 16 0 0 0 20 2z"/><path d="M13 36h14M15 41h10M16 45.5h8"/><path d="M13 9v18M27 9v18M13 18h5l1.5-3 3 6 1.5-3h3"/></g></svg><span>Накал</span></a>
 
       <nav class="site-nav" aria-label="Основная навигация">
         <ul class="site-nav__list">
           <li class="site-nav__item">
-            <a class="site-nav__link" href="index.html">
-              Главная
-            </a>
+            <a class="site-nav__link" href="index.html">Главная</a>
           </li>
           <li class="site-nav__item">
             <a class="site-nav__link" href="catalog.html">Каталог</a>
           </li>
           <li class="site-nav__item">
-            <a class="site-nav__link" href="product.html">Товар</a>
-          </li>
-          <li class="site-nav__item">
             <a class="site-nav__link" href="order.html">Заказ</a>
           </li>
           <li class="site-nav__item">
-            <a class="site-nav__link site-nav__link--active" href="contacts.html" aria-current="page">Контакты</a>
-          </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link" href="index.html#popular">
-              Популярные товары
-            </a>
-          </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link" href="index.html#advantages">Преимущества</a>
+            <a class="site-nav__link site-nav__link--active" aria-current="page" href="contacts.html">Контакты</a>
           </li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <nav class="breadcrumbs" aria-label="Хлебные крошки">
       <a class="breadcrumbs__link" href="index.html">Главная</a>
       <span class="breadcrumbs__current" aria-current="page">Контакты</span>
@@ -59,32 +76,108 @@
 
     <section class="section">
       <h1>Контакты</h1>
-      <p>
-        Здесь размещается контактная информация магазина дизайнерских ламп «Накал».
-      </p>
+      <p>Свяжитесь с нами любым удобным способом или приезжайте в шоурум «Накал».</p>
 
-      <ul>
-        <li>Телефон: +7 (900) 000-00-00</li>
-        <li>E-mail: info@example.com</li>
-        <li>Адрес: г. Москва, учебный проект</li>
+      <ul class="contact-list">
+        <li class="contact-list__item"><span class="contact-list__label">Телефон</span>
+          <a href="tel:+79651236769">+7 (965) 123-67-69</a></li>
+        <li class="contact-list__item"><span class="contact-list__label">E-mail</span>
+          <a href="mailto:info@nakal-lamps.ru">info@nakal-lamps.ru</a></li>
+        <li class="contact-list__item"><span class="contact-list__label">Адрес</span>
+          г. Москва, ул. Тверская, 12, стр. 1</li>
       </ul>
+    </section>
+
+    <section class="section" aria-labelledby="hours-title">
+      <h2 class="section__title" id="hours-title">График работы</h2>
+
+      <div class="table-wrapper">
+        <table class="product-table product-table--compact">
+          <caption class="visually-hidden">График работы магазина</caption>
+          <thead>
+            <tr>
+              <th class="product-table__heading" scope="col">День</th>
+              <th class="product-table__heading" scope="col">Время</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th class="product-table__cell" scope="row">Понедельник – суббота</th><td class="product-table__cell">10:00–21:00</td></tr>
+            <tr><th class="product-table__cell" scope="row">Воскресенье</th><td class="product-table__cell">11:00–20:00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="route-title">
+      <h2 class="section__title" id="route-title">Как добраться</h2>
+
+      <ul class="route-list">
+        <li class="route-list__item"><strong>На метро:</strong> станции «Пушкинская», «Тверская» и «Чеховская» — 5–7 минут пешком.</li>
+        <li class="route-list__item"><strong>Пешком:</strong> вход со стороны Тверской, шоурум находится во дворе, вывеска «Накал» над дверью.</li>
+        <li class="route-list__item"><strong>На машине:</strong> въезд во двор через арку, парковка для посетителей рядом с входом.</li>
+      </ul>
+    </section>
+
+    <section class="section map-section" id="map" aria-labelledby="map-title">
+      <h2 class="section__title" id="map-title">Как нас найти</h2>
+      <p class="map-section__text">Шоурум «Накал»: г. Москва, ул. Тверская, 12, стр. 1. Ежедневно, вход со двора.</p>
+      <div class="map">
+        <iframe class="map__frame" title="Карта: шоурум «Накал», Москва, ул. Тверская, 12"
+          src="https://yandex.ru/map-widget/v1/?ll=37.605700%2C55.764000&amp;z=16&amp;pt=37.605700%2C55.764000%2Cpm2orgl"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <a class="map-section__link" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%A2%D0%B2%D0%B5%D1%80%D1%81%D0%BA%D0%B0%D1%8F%2C%2012" target="_blank" rel="noopener">Открыть в Яндекс Картах</a>
     </section>
 
     <section class="section" id="feedback">
       <h2>Обратная связь</h2>
-      <p>
-        Для отправки заявки используйте форму на странице заявки.
-      </p>
+      <p>Для отправки заявки используйте форму на странице заказа.</p>
       <a class="button" href="order.html">Перейти к форме</a>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p class="site-footer__text">&copy; 2026 Накал, магазин дизайнерских ламп. Учебный проект. Все права защищены.</p>
-    <p class="site-footer__text">Дисциплина: Фронтенд и бэкенд разработка</p>
+    <div class="site-footer__inner">
+      <section class="site-footer__col site-footer__about" aria-labelledby="footer-about">
+        <h2 class="site-footer__title" id="footer-about">О магазине</h2>
+        <p class="site-footer__text">
+          «Накал» — магазин дизайнерских ламп. Настольные лампы, торшеры и подвесные
+          светильники от независимых мастерских, с доставкой по всей России.
+        </p>
+      </section>
+
+      <nav class="site-footer__col site-footer__nav" aria-labelledby="footer-nav">
+        <h2 class="site-footer__title" id="footer-nav">Навигация</h2>
+        <ul class="site-footer__list">
+          <li><a class="site-footer__link" href="index.html">Главная</a></li>
+          <li><a class="site-footer__link" href="catalog.html">Каталог</a></li>
+          <li><a class="site-footer__link" href="order.html">Заказ</a></li>
+          <li><a class="site-footer__link" href="contacts.html">Контакты</a></li>
+          <li><a class="site-footer__link" href="index.html#delivery">Доставка и гарантия</a></li>
+        </ul>
+      </nav>
+
+      <section class="site-footer__col" aria-labelledby="footer-contacts">
+        <h2 class="site-footer__title" id="footer-contacts">Контакты</h2>
+        <ul class="site-footer__list site-footer__contacts">
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>г. Москва, ул. Тверская, 12, стр. 1</span></li>
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><a class="site-footer__link" href="tel:+79651236769">+7 (965) 123-67-69</a></li>
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Пн–Сб 10:00–21:00, Вс 11:00–20:00</span></li>
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a class="site-footer__link" href="mailto:info@nakal-lamps.ru">info@nakal-lamps.ru</a></li>
+        </ul>
+
+        <ul class="site-footer__social" aria-label="Мы в соцсетях">
+          <li><a class="site-footer__social-link" href="https://max.ru/" target="_blank" rel="noopener" aria-label="Накал в MAX"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 4.6 16.7L21 21l-1.3-4.3A9 9 0 0 0 12 3z"/><path d="M8 15V9l4 4 4-4v6"/></svg></a></li>
+          <li><a class="site-footer__social-link" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Накал на YouTube"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></svg></a></li>
+          <li><a class="site-footer__social-link" href="https://t.me/" target="_blank" rel="noopener" aria-label="Накал в Telegram"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11l6 2.5L11 20l3-4 5 3z"/><path d="m9 13.5 12-9.5"/></svg></a></li>
+        </ul>
+      </section>
+    </div>
+
+    <p class="site-footer__copy">&copy; 2026 «Накал». Магазин дизайнерских ламп. Все права защищены.</p>
   </footer>
 
-  <a class="to-top" href="#">Наверх</a>
+  <a class="to-top" href="#" aria-label="Наверх"><svg class="to-top__icon" viewBox="0 0 40 56" width="40" height="56" aria-hidden="true" focusable="false"><path d="M17.5 3h5L35 27H5z" fill="currentColor"/><path d="M20 27v23M11 52h18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></a>
 
 </body>
 

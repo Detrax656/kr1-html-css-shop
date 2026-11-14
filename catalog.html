@@ -4,33 +4,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Каталог товаров магазина ламп «Накал».">
-  <title>Каталог товаров — Накал</title>
+  <meta name="description" content="Каталог магазина дизайнерских ламп «Накал»: настольные лампы, торшеры и подвесные светильники.">
+  <title>Каталог ламп — Накал</title>
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem('theme') || 'dark';
+    } catch (e) {}
+  </script>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/theme.js" defer></script>
   <meta property="og:type" content="website">
   <meta property="og:title" content="Накал — магазин дизайнерских ламп">
-  <meta property="og:description" content="Учебный frontend-проект: магазин дизайнерских ламп «Накал».">
+  <meta property="og:description" content="Дизайнерские настольные лампы, торшеры и подвесные светильники. Доставка по России.">
   <meta property="og:image" content="https://detrax656.github.io/kr1-html-css-shop/images/preview.jpg">
 </head>
 
 <body>
+  <a class="skip-link" href="#main">Перейти к основному содержимому</a>
   <header class="site-header">
     <div class="site-header__inner">
-      <a class="site-header__logo" href="index.html">Накал</a>
+      <button class="pull" id="pull" type="button" aria-label="Переключить тему оформления" aria-pressed="false">
+        <svg viewBox="0 0 60 330" aria-hidden="true" focusable="false">
+          <g id="swing">
+            <line class="pull__cord" id="cord" x1="30" y1="0" x2="30" y2="100"/>
+            <g id="bulb-group" transform="translate(30 100)">
+              <rect class="pull__socket" x="-6" y="0" width="12" height="14" rx="2"/>
+              <path class="pull__bulb" d="M-6 14 C-6 22 -14 26 -14 40 A14 14 0 0 0 14 40 C14 26 6 22 6 14 Z"/>
+              <g transform="translate(0 38)">
+                <circle class="pull__ring" r="22"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(0)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(45)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(90)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(135)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(180)"/>
+                <circle class="pull__hit" r="28"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </button>
+      <a class="site-header__logo" href="index.html"><svg class="site-header__mark" viewBox="0 0 40 48" width="30" height="36" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 2a16 16 0 0 0-9 29.2V36h18v-4.8A16 16 0 0 0 20 2z"/><path d="M13 36h14M15 41h10M16 45.5h8"/><path d="M13 9v18M27 9v18M13 18h5l1.5-3 3 6 1.5-3h3"/></g></svg><span>Накал</span></a>
 
       <nav class="site-nav" aria-label="Основная навигация">
         <ul class="site-nav__list">
           <li class="site-nav__item">
-            <a class="site-nav__link" href="index.html">
-              Главная
-            </a>
+            <a class="site-nav__link" href="index.html">Главная</a>
           </li>
           <li class="site-nav__item">
-            <a class="site-nav__link site-nav__link--active" href="catalog.html" aria-current="page">Каталог</a>
-          </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link" href="product.html">Товар</a>
+            <a class="site-nav__link site-nav__link--active" aria-current="page" href="catalog.html">Каталог</a>
           </li>
           <li class="site-nav__item">
             <a class="site-nav__link" href="order.html">Заказ</a>
@@ -38,248 +63,136 @@
           <li class="site-nav__item">
             <a class="site-nav__link" href="contacts.html">Контакты</a>
           </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link" href="index.html#popular">
-              Популярные товары
-            </a>
-          </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link" href="index.html#advantages">Преимущества</a>
-          </li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <nav class="breadcrumbs" aria-label="Хлебные крошки">
       <a class="breadcrumbs__link" href="index.html">Главная</a>
       <span class="breadcrumbs__current" aria-current="page">Каталог</span>
     </nav>
 
     <section class="section">
-      <h1>Каталог товаров</h1>
+      <h1>Каталог ламп</h1>
       <p>
-        На этой странице представлен учебный каталог товаров с фильтрами.
-        Карточки бывают нескольких видов: новинки, хиты, скидки и товары,
-        которых нет в наличии.
+        Настольные лампы, торшеры и подвесные светильники. Подберите подходящую модель
+        по типу, цене и наличию.
       </p>
 
-      <section class="catalog-layout">
-        <aside class="catalog-filters">
-          <h2>Фильтры</h2>
+      <div class="catalog-layout">
+        <aside class="catalog-filters" aria-labelledby="filters-title">
+          <h2 id="filters-title">Фильтры</h2>
 
-          <form class="catalog-filters__form" action="#" method="get">
+          <form class="catalog-filters__form" id="catalog-form" action="#" method="get">
             <fieldset class="catalog-filters__group">
-              <legend class="catalog-filters__legend">Категория</legend>
+              <legend class="catalog-filters__legend">Тип светильника</legend>
 
               <label class="catalog-filters__label">
-                <input type="checkbox" name="category" value="all">
-                Все товары
+                <input type="checkbox" name="type" value="table">
+                Настольные лампы
               </label>
 
               <label class="catalog-filters__label">
-                <input type="checkbox" name="category" value="popular">
-                Популярные
+                <input type="checkbox" name="type" value="floor">
+                Торшеры
               </label>
 
               <label class="catalog-filters__label">
-                <input type="checkbox" name="category" value="new">
-                Новинки
-              </label>
-
-              <label class="catalog-filters__label">
-                <input type="checkbox" name="category" value="sale">
-                Акции
+                <input type="checkbox" name="type" value="pendant">
+                Подвесные светильники
               </label>
             </fieldset>
 
             <fieldset class="catalog-filters__group">
-              <legend class="catalog-filters__legend">Цена</legend>
+              <legend class="catalog-filters__legend">Цена, ₽</legend>
 
               <label class="catalog-filters__label" for="price-from">От</label>
               <input class="catalog-filters__input" id="price-from" name="price-from" type="number" min="0"
-                placeholder="0">
+                inputmode="numeric" placeholder="0">
 
               <label class="catalog-filters__label" for="price-to">До</label>
               <input class="catalog-filters__input" id="price-to" name="price-to" type="number" min="0"
-                placeholder="5000">
+                inputmode="numeric" placeholder="20000">
             </fieldset>
 
-            <button class="button" type="submit">Применить</button>
+            <fieldset class="catalog-filters__group">
+              <legend class="catalog-filters__legend">Дополнительно</legend>
+
+              <label class="catalog-filters__label">
+                <input type="checkbox" name="in-stock" value="1">
+                Только в наличии
+              </label>
+
+              <label class="catalog-filters__label">
+                <input type="checkbox" name="on-sale" value="1">
+                Со скидкой
+              </label>
+            </fieldset>
+
+            <div class="catalog-filters__actions">
+              <button class="button" type="submit">Применить</button>
+              <button class="button button--secondary" type="reset">Сбросить</button>
+            </div>
           </form>
         </aside>
 
-        <section class="catalog-products">
-          <h2 class="section__title">Список товаров</h2>
-
-          <div class="products-grid">
-            <article class="product-card product-card--new">
-              <span class="product-card__badge">Новинка</span>
-              <img class="product-card__image" src="images/product-640.jpg"
-                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                alt="Товар 1: фото товара" width="640" height="480" loading="lazy">
-              <h3 class="product-card__title">Товар 1</h3>
-              <p class="product-card__category">Категория: Новинки</p>
-              <p class="product-card__description">Краткое описание учебного товара.</p>
-              <p class="product-card__price">Цена: 1000 руб.</p>
-              <a class="button product-card__button" href="product.html">Подробнее</a>
-            </article>
-
-            <article class="product-card product-card--hit">
-              <span class="product-card__badge">Хит</span>
-              <img class="product-card__image" src="images/product-640.jpg"
-                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                alt="Товар 2: фото товара" width="640" height="480" loading="lazy">
-              <h3 class="product-card__title">Товар 2</h3>
-              <p class="product-card__category">Категория: Популярные</p>
-              <p class="product-card__description">Краткое описание учебного товара.</p>
-              <p class="product-card__price">Цена: 1500 руб.</p>
-              <a class="button product-card__button" href="product.html">Подробнее</a>
-            </article>
-
-            <article class="product-card product-card--discount">
-              <span class="product-card__badge">Скидка</span>
-              <img class="product-card__image" src="images/product-640.jpg"
-                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                alt="Товар 3: фото товара" width="640" height="480" loading="lazy">
-              <h3 class="product-card__title">Товар 3</h3>
-              <p class="product-card__category">Категория: Акции</p>
-              <p class="product-card__description">Краткое описание учебного товара.</p>
-              <p class="product-card__price">Цена: 2000 руб.</p>
-              <a class="button product-card__button" href="product.html">Подробнее</a>
-            </article>
-
-            <article class="product-card product-card--new">
-              <span class="product-card__badge">Новинка</span>
-              <img class="product-card__image" src="images/product-640.jpg"
-                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                alt="Товар 4: фото товара" width="640" height="480" loading="lazy">
-              <h3 class="product-card__title">Товар 4</h3>
-              <p class="product-card__category">Категория: Новинки</p>
-              <p class="product-card__description">Краткое описание учебного товара.</p>
-              <p class="product-card__price">Цена: 2500 руб.</p>
-              <a class="button product-card__button" href="product.html">Подробнее</a>
-            </article>
-
-            <article class="product-card product-card--hit">
-              <span class="product-card__badge">Хит</span>
-              <img class="product-card__image" src="images/product-640.jpg"
-                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                alt="Товар 5: фото товара" width="640" height="480" loading="lazy">
-              <h3 class="product-card__title">Товар 5</h3>
-              <p class="product-card__category">Категория: Популярные</p>
-              <p class="product-card__description">Краткое описание учебного товара.</p>
-              <p class="product-card__price">Цена: 3000 руб.</p>
-              <a class="button product-card__button" href="product.html">Подробнее</a>
-            </article>
-
-            <article class="product-card product-card--discount">
-              <span class="product-card__badge">Скидка</span>
-              <img class="product-card__image" src="images/product-640.jpg"
-                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                alt="Товар 6: фото товара" width="640" height="480" loading="lazy">
-              <h3 class="product-card__title">Товар 6</h3>
-              <p class="product-card__category">Категория: Акции</p>
-              <p class="product-card__description">Краткое описание учебного товара.</p>
-              <p class="product-card__price">Цена: 6700 руб.</p>
-              <a class="button product-card__button" href="product.html">Подробнее</a>
-            </article>
-
-            <article class="product-card">
-              <img class="product-card__image" src="images/product-640.jpg"
-                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                alt="Товар 7: фото товара" width="640" height="480" loading="lazy">
-              <h3 class="product-card__title">Товар 7</h3>
-              <p class="product-card__category">Категория: Учебные товары</p>
-              <p class="product-card__description">Краткое описание учебного товара.</p>
-              <p class="product-card__price">Цена: 4000 руб.</p>
-              <a class="button product-card__button" href="product.html">Подробнее</a>
-            </article>
-
-            <article class="product-card product-card--new">
-              <span class="product-card__badge">Новинка</span>
-              <img class="product-card__image" src="images/product-640.jpg"
-                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                alt="Товар 8: фото товара" width="640" height="480" loading="lazy">
-              <h3 class="product-card__title">Товар 8</h3>
-              <p class="product-card__category">Категория: Новинки</p>
-              <p class="product-card__description">Краткое описание учебного товара.</p>
-              <p class="product-card__price">Цена: 6000 руб.</p>
-              <a class="button product-card__button" href="product.html">Подробнее</a>
-            </article>
-
-            <article class="product-card product-card--unavailable">
-              <span class="product-card__badge">Нет в наличии</span>
-              <img class="product-card__image" src="images/product-640.jpg"
-                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                alt="Товар 9: фото товара" width="640" height="480" loading="lazy">
-              <h3 class="product-card__title">Товар 9</h3>
-              <p class="product-card__category">Категория: Учебные товары</p>
-              <p class="product-card__description">Краткое описание учебного товара.</p>
-              <p class="product-card__price">Цена: 4500 руб.</p>
-              <button class="button product-card__button" type="button" disabled>Недоступно</button>
-            </article>
-
-            <article class="product-card product-card--unavailable">
-              <span class="product-card__badge">Нет в наличии</span>
-              <img class="product-card__image" src="images/product-640.jpg"
-                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                alt="Товар 10: фото товара" width="640" height="480" loading="lazy">
-              <h3 class="product-card__title">Товар 10</h3>
-              <p class="product-card__category">Категория: Учебные товары</p>
-              <p class="product-card__description">Краткое описание учебного товара.</p>
-              <p class="product-card__price">Цена: 5000 руб.</p>
-              <button class="button product-card__button" type="button" disabled>Недоступно</button>
-            </article>
-
-            <article class="product-card">
-              <img class="product-card__image" src="images/product-640.jpg"
-                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                alt="Товар 11: фото товара" width="640" height="480" loading="lazy">
-              <h3 class="product-card__title">Товар 11</h3>
-              <p class="product-card__category">Категория: Учебные товары</p>
-              <p class="product-card__description">Краткое описание учебного товара.</p>
-              <p class="product-card__price">Цена: 9999 руб.</p>
-              <a class="button product-card__button" href="product.html">Подробнее</a>
-            </article>
-
-            <article class="product-card product-card--unavailable">
-              <span class="product-card__badge">Нет в наличии</span>
-              <img class="product-card__image" src="images/product-640.jpg"
-                srcset="images/product-480.jpg 480w, images/product-640.jpg 640w, images/product-960.jpg 960w"
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                alt="Товар 12: фото товара" width="640" height="480" loading="lazy">
-              <h3 class="product-card__title">Товар 12</h3>
-              <p class="product-card__category">Категория: Учебные товары</p>
-              <p class="product-card__description">Краткое описание учебного товара.</p>
-              <p class="product-card__price">Цена: 6767 руб.</p>
-              <button class="button product-card__button" type="button" disabled>Недоступно</button>
-            </article>
-
-          </div>
+        <section class="catalog-products" aria-labelledby="products-title">
+          <h2 class="section__title" id="products-title">Список товаров</h2>
+          <p class="catalog-products__count" id="catalog-count" role="status"></p>
+          <p class="catalog-products__empty" id="catalog-empty" hidden>
+            По выбранным условиям ничего не найдено. Измените фильтры или сбросьте их.
+          </p>
+          <div class="products-grid" id="catalog-grid"></div>
+          <noscript><p>Для отображения каталога включите JavaScript в браузере.</p></noscript>
         </section>
-      </section>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p class="site-footer__text">&copy; 2026 Накал, магазин дизайнерских ламп. Учебный проект. Все права защищены.</p>
-    <p class="site-footer__text">Дисциплина: Фронтенд и бэкенд разработка</p>
+    <div class="site-footer__inner">
+      <section class="site-footer__col site-footer__about" aria-labelledby="footer-about">
+        <h2 class="site-footer__title" id="footer-about">О магазине</h2>
+        <p class="site-footer__text">
+          «Накал» — магазин дизайнерских ламп. Настольные лампы, торшеры и подвесные
+          светильники от независимых мастерских, с доставкой по всей России.
+        </p>
+      </section>
+
+      <nav class="site-footer__col site-footer__nav" aria-labelledby="footer-nav">
+        <h2 class="site-footer__title" id="footer-nav">Навигация</h2>
+        <ul class="site-footer__list">
+          <li><a class="site-footer__link" href="index.html">Главная</a></li>
+          <li><a class="site-footer__link" href="catalog.html">Каталог</a></li>
+          <li><a class="site-footer__link" href="order.html">Заказ</a></li>
+          <li><a class="site-footer__link" href="contacts.html">Контакты</a></li>
+          <li><a class="site-footer__link" href="index.html#delivery">Доставка и гарантия</a></li>
+        </ul>
+      </nav>
+
+      <section class="site-footer__col" aria-labelledby="footer-contacts">
+        <h2 class="site-footer__title" id="footer-contacts">Контакты</h2>
+        <ul class="site-footer__list site-footer__contacts">
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>г. Москва, ул. Тверская, 12, стр. 1</span></li>
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><a class="site-footer__link" href="tel:+79651236769">+7 (965) 123-67-69</a></li>
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Пн–Сб 10:00–21:00, Вс 11:00–20:00</span></li>
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a class="site-footer__link" href="mailto:info@nakal-lamps.ru">info@nakal-lamps.ru</a></li>
+        </ul>
+
+        <ul class="site-footer__social" aria-label="Мы в соцсетях">
+          <li><a class="site-footer__social-link" href="https://max.ru/" target="_blank" rel="noopener" aria-label="Накал в MAX"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 4.6 16.7L21 21l-1.3-4.3A9 9 0 0 0 12 3z"/><path d="M8 15V9l4 4 4-4v6"/></svg></a></li>
+          <li><a class="site-footer__social-link" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Накал на YouTube"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></svg></a></li>
+          <li><a class="site-footer__social-link" href="https://t.me/" target="_blank" rel="noopener" aria-label="Накал в Telegram"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11l6 2.5L11 20l3-4 5 3z"/><path d="m9 13.5 12-9.5"/></svg></a></li>
+        </ul>
+      </section>
+    </div>
+
+    <p class="site-footer__copy">&copy; 2026 «Накал». Магазин дизайнерских ламп. Все права защищены.</p>
   </footer>
 
-  <a class="to-top" href="#">Наверх</a>
+  <a class="to-top" href="#" aria-label="Наверх"><svg class="to-top__icon" viewBox="0 0 40 56" width="40" height="56" aria-hidden="true" focusable="false"><path d="M17.5 3h5L35 27H5z" fill="currentColor"/><path d="M20 27v23M11 52h18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></a>
 
 </body>
 

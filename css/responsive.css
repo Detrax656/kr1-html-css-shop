@@ -70,10 +70,20 @@ main {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-md);
+  gap: var(--space-sm);
+  position: relative;   /* точка отсчёта для лампочки-выключателя */
   width: min(100% - 32px, var(--container-width));
   margin-inline: auto;
-  padding-block: var(--space-md);
+  padding: var(--space-md) 0 var(--space-md) 64px;   /* слева место под лампочку */
+}
+
+/* Лампочка свисает слева от логотипа, шнур уходит за верхний край экрана */
+.pull {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  width: 60px;
+  height: 330px;
 }
 
 .site-nav {
@@ -82,8 +92,8 @@ main {
 
 .site-nav__list {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
+  flex-wrap: wrap;
+  gap: var(--space-xs);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -91,7 +101,8 @@ main {
 
 .site-nav__link {
   display: block;
-  padding: 12px 16px;
+  padding: 10px 7px;
+  font-size: 15px;
 }
 
 /* ===============================
@@ -127,6 +138,123 @@ main {
   gap: var(--space-lg);
 }
 
+.product-card__media {
+  display: block;
+}
+
+.product-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: auto;
+  padding-top: var(--space-sm);
+}
+
+.catalog-filters__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.contact-list {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.contact-list__item {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.route-list {
+  display: grid;
+  gap: var(--space-sm);
+  padding-left: var(--space-lg);
+}
+
+.product-details__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.product-card__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+/* ===============================
+   Подвал (мобильные)
+   =============================== */
+
+.site-footer__inner {
+  display: grid;
+  gap: var(--space-xl);
+  width: min(100% - 32px, var(--container-width));
+  margin-inline: auto;
+  padding-block: var(--space-xl);
+}
+
+.site-footer__list {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.site-footer__link {
+  display: inline-block;
+  padding-block: 4px;
+}
+
+.site-footer__contact {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.site-footer__social {
+  display: flex;
+  gap: var(--space-sm);
+  margin: var(--space-md) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer__social-link {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+}
+
+.site-footer__copy {
+  width: min(100% - 32px, var(--container-width));
+  margin-inline: auto;
+  padding-block: var(--space-md);
+}
+
+/* ===============================
+   Карта (мобильные)
+   =============================== */
+
+.map {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.map__frame {
+  width: 100%;
+  height: 100%;
+}
+
+.map-section__link {
+  display: inline-block;
+  margin-top: var(--space-md);
+}
+
+
 /* ===============================
    4. Страница товара, таблица, отзывы (мобильные)
    =============================== */
@@ -146,6 +274,10 @@ main {
 .product-table {
   width: 100%;
   min-width: 640px;
+}
+
+.product-table--compact {
+  min-width: 0;
 }
 
 .reviews {
@@ -207,6 +339,10 @@ main {
 .to-top {
   right: 16px;
   bottom: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 56px;
 }
 
 /* ===============================
@@ -225,7 +361,7 @@ main {
 
 @media (min-width: 768px) {
   :root {
-    --header-height: 160px;
+    --header-height: 76px;
   }
 
   /* Шапка закрепляется только на планшете и desktop */
@@ -235,14 +371,30 @@ main {
     z-index: 100;
   }
 
-  .site-nav__list {
+  /* Логотип и меню в одну строку */
+  .site-header__inner {
     flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
+    justify-content: space-between;
+    min-height: var(--header-height);
+    padding-block: var(--space-sm);
+  }
+
+  .site-nav {
+    width: auto;
   }
 
   .site-nav__link {
-    padding: 8px 12px;
+    padding: 8px 14px;
+    font-size: 16px;
+  }
+
+  .map {
+    aspect-ratio: 16 / 9;
+  }
+
+  .contact-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .product-details {
@@ -289,6 +441,16 @@ main {
    =============================== */
 
 @media (min-width: 900px) {
+  /* Подвал в три колонки: меню по центру, ссылки выровнены влево */
+  .site-footer__inner {
+    grid-template-columns: 1.3fr 1fr 1.4fr;
+    gap: var(--space-xl);
+  }
+
+  .site-footer__nav {
+    justify-self: center;
+  }
+
   .hero {
     grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
   }
@@ -299,18 +461,13 @@ main {
    =============================== */
 
 @media (min-width: 1024px) {
-  :root {
-    --header-height: 76px;
+  .map {
+    aspect-ratio: 21 / 9;
   }
 
-  .site-header__inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .site-nav {
-    width: auto;
+  /* Лампочка висит ниже: хлебные крошки сдвигаем, чтобы она их не закрывала */
+  .breadcrumbs {
+    padding-left: 72px;
   }
 
   .products-grid {

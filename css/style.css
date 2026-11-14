@@ -20,14 +20,20 @@
   --color-border: #3a3a3a;
 
   /* Оранжевый акцент */
-  --color-primary: #ff8a00;
-  --color-primary-hover: #ffb030;
+  --color-primary: #ff8330;
+  --color-primary-hover: #ffa24d;
   --color-on-primary: #111111;   /* тёмный текст на оранжевом фоне */
-  --color-link: #ff8a00;         /* цвет ссылок и текста-акцента */
+  --color-link: #ff8330;         /* цвет ссылок и текста-акцента */
 
   --color-danger: #ff6b6b;
   --color-success: #4cc972;
   --color-success-bg: #16281c;
+
+  /* Лампочка-выключатель */
+  --color-cord: #8a8a8a;
+  --color-socket: #3a3a3a;
+  --color-bulb: #5a5a5a;         /* лампочка выключена */
+  --color-ray: #ffa24d;
 
   /* Отступы */
   --space-xs: 4px;
@@ -56,10 +62,14 @@
   --color-muted: #5f584e;
   --color-border: #d8cdbb;
 
-  --color-link: #a84f00;         /* тёмно-оранжевый: на кремовом фоне контраст не ниже 4.5:1 */
+  --color-link: #a94a12;         /* тёмно-оранжевый: на кремовом фоне контраст не ниже 4.5:1 */
   --color-danger: #b00020;
   --color-success: #168a2f;
   --color-success-bg: #eefaf0;
+
+  --color-cord: #4a4a4a;
+  --color-socket: #2b2b2b;
+  --color-bulb: #ff8330;         /* лампочка включена */
 }
 
 /* ===============================
@@ -72,6 +82,7 @@ body {
   line-height: 1.5;
   color: var(--color-text);
   background-color: var(--color-bg);
+  transition: background-color 0.6s, color 0.6s;
 }
 
 :target {
@@ -158,9 +169,134 @@ a:focus-visible {
 }
 
 .site-header__logo {
-  font-weight: 700;
-  color: var(--color-link);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text);
   text-decoration: none;
+}
+
+.site-header__logo:hover {
+  color: var(--color-text);
+}
+
+.site-header__mark {
+  flex: none;
+  color: var(--color-primary);
+  transition: color 0.2s;
+}
+
+.site-header__logo:hover .site-header__mark {
+  color: var(--color-primary-hover);
+}
+
+/* Лампочка-выключатель: кнопка сама не ловит указатель, тянуть можно только за лампочку */
+.pull {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: grab;
+  pointer-events: none;
+  touch-action: none;   /* без этого на телефоне тяга будет прокручивать страницу */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pull:focus-visible {
+  outline: none;
+}
+
+.pull:focus-visible .pull__bulb {
+  stroke: var(--color-text);
+  stroke-width: 3;
+}
+
+.pull svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.pull__cord {
+  stroke: var(--color-cord);
+  stroke-width: 2.5;
+  stroke-dasharray: 4 2;   /* пунктир даёт «витой» вид шнура */
+}
+
+.pull__socket {
+  fill: var(--color-socket);
+  transition: fill 0.6s;
+}
+
+.pull__bulb {
+  fill: var(--color-bulb);
+  transition: fill 0.3s;
+}
+
+.pull__hit {
+  fill: transparent;
+  pointer-events: all;
+  cursor: grab;
+}
+
+.pull__hit:active {
+  cursor: grabbing;
+}
+
+/* Вспышка: кольцо и 5 лучиков появляются и пропадают при включении света */
+.pull__ray,
+.pull__ring {
+  fill: none;
+  stroke: var(--color-ray);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+.pull__ray {
+  stroke-dasharray: 10 10;
+  stroke-dashoffset: 10;
+}
+
+.pull__ring {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.pull.burst .pull__ray {
+  animation: pull-ray 0.6s ease-out;
+}
+
+.pull.burst .pull__ring {
+  animation: pull-ring 0.6s ease-out;
+}
+
+@keyframes pull-ray {
+  0% { opacity: 1; stroke-dashoffset: 10; }
+  50% { opacity: 1; stroke-dashoffset: 0; }
+  100% { opacity: 1; stroke-dashoffset: -10; }
+}
+
+@keyframes pull-ring {
+  0% { opacity: 1; transform: scale(0.7); }
+  100% { opacity: 0; transform: scale(1.3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .pull__socket,
+  .pull__bulb {
+    transition: none;
+  }
+
+  .pull.burst .pull__ray,
+  .pull.burst .pull__ring {
+    animation: none;
+  }
 }
 
 .site-nav__link {
@@ -243,6 +379,7 @@ a:focus-visible {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  background-color: #ffffff;
   border-radius: var(--radius-md);
 }
 
@@ -313,21 +450,33 @@ a:focus-visible {
   background-color: var(--color-surface);
 }
 
-/* Позиционирование: fixed: кнопка «Наверх» прикреплена к окну */
+/* Позиционирование: fixed: кнопка «Наверх» (торшер-стрелка) прикреплена к окну */
 .to-top {
   position: fixed;
   z-index: 90;
-  padding: var(--space-sm) var(--space-md);
-  color: var(--color-on-primary);
-  background-color: var(--color-primary);
-  font-weight: 700;
+  color: var(--color-primary);
   text-decoration: none;
-  border-radius: var(--radius-sm);
+  transition: color 0.2s, opacity 0.3s, visibility 0.3s;
 }
 
 .to-top:hover {
-  color: var(--color-on-primary);
-  background-color: var(--color-primary-hover);
+  color: var(--color-primary-hover);
+}
+
+.to-top__icon {
+  display: block;
+}
+
+/* До начала прокрутки кнопка скрыта (класс ставит main.js) */
+.to-top--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .to-top {
+    transition: none;
+  }
 }
 
 .catalog-filters {
@@ -337,9 +486,171 @@ a:focus-visible {
   background-color: var(--color-surface);
 }
 
+.site-footer {
+  border-top: 1px solid var(--color-border);
+}
+
+.site-footer__title {
+  margin: 0 0 var(--space-md);
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
 .site-footer__text {
   margin: 0;
-  padding: var(--space-xs) var(--space-md);
+  color: var(--color-muted);
+}
+
+.site-footer__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer__link {
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.site-footer__link:hover {
+  color: var(--color-link);
+  text-decoration: underline;
+}
+
+.site-footer__contact {
+  color: var(--color-muted);
+}
+
+.site-footer__icon {
+  flex: none;
+  color: var(--color-primary);
+}
+
+.site-footer__social-link {
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.site-footer__social-link:hover {
+  color: var(--color-on-primary);
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.site-footer__copy {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Яндекс Карты */
+.map {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  overflow: hidden;
+}
+
+.map__frame {
+  display: block;
+  border: 0;
+}
+
+.map-section__text {
+  color: var(--color-muted);
+}
+
+/* Контакты */
+.contact-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-list__label {
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.route-list__item {
+  color: var(--color-muted);
+}
+
+.route-list__item strong {
+  color: var(--color-text);
+}
+
+/* Цены, статусы и вспомогательные классы */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.product-card__price-old,
+.product-details__price-old {
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+.product-card--discount .product-card__price-new,
+.product-details__price-new {
+  color: var(--color-danger);
+}
+
+.product-card__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-card__link:hover {
+  color: var(--color-link);
+  text-decoration: underline;
+}
+
+.product-card--unavailable .product-card__image {
+  opacity: 0.55;
+}
+
+.product-details__badge {
+  display: inline-block;
+  margin: 0;
+  padding: var(--space-xs) var(--space-sm);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-on-primary);
+  background-color: var(--color-success);
+  border-radius: var(--radius-sm);
+}
+
+.product-details__badge--hit {
+  background-color: var(--color-primary);
+}
+
+.product-details__badge--discount {
+  background-color: var(--color-danger);
+}
+
+.product-details__badge--unavailable {
+  background-color: var(--color-muted);
+}
+
+.product-details__availability--no {
+  color: var(--color-muted);
+}
+
+.catalog-products__count {
   color: var(--color-muted);
 }
 
