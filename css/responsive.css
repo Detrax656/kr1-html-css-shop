@@ -1,0 +1,507 @@
+/*
+  Адаптивные стили: РАСКЛАДКА (flex, grid, размеры блоков, отступы).
+  Подход: Mobile First.
+  Базовые правила рассчитаны на мобильный экран (до 640px),
+  расширения для планшета и desktop добавляются через min-width.
+  Подключается после style.css.
+*/
+
+/* ===============================
+   1. База
+   =============================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Высота закреплённой шапки: на мобильных шапка не закреплена */
+  --header-height: 0px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Основной контейнер страницы */
+main {
+  width: min(100% - 32px, var(--container-width));
+  margin-inline: auto;
+  padding-block: var(--space-lg);
+}
+
+.section,
+.catalog-layout,
+.aside-info {
+  margin-bottom: var(--space-xl);
+}
+
+.section {
+  padding-block: clamp(8px, 2vw, 24px);
+}
+
+.breadcrumbs {
+  margin-bottom: var(--space-md);
+}
+
+.success-message {
+  margin: var(--space-lg) 0;
+}
+
+/* ===============================
+   2. Шапка и навигация (мобильные)
+   =============================== */
+
+/* На мобильных шапка не закреплена, чтобы не занимать экран */
+.site-header {
+  position: static;
+}
+
+.site-header__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  position: relative;   /* точка отсчёта для лампочки-выключателя */
+  width: min(100% - 32px, var(--container-width));
+  margin-inline: auto;
+  padding: var(--space-md) 0 var(--space-md) 64px;   /* слева место под лампочку */
+}
+
+/* Лампочка свисает слева от логотипа, шнур уходит за верхний край экрана */
+.pull {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  width: 60px;
+  height: 330px;
+}
+
+.site-nav {
+  width: 100%;
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav__link {
+  display: block;
+  padding: 10px 7px;
+  font-size: 15px;
+}
+
+/* ===============================
+   3. Hero, карточки и каталог (мобильные)
+   =============================== */
+
+.hero {
+  display: grid;
+  gap: var(--space-lg);
+  align-items: center;
+  margin-bottom: var(--space-xl);
+}
+
+.hero__content {
+  display: grid;
+  gap: var(--space-md);
+  justify-items: start;
+}
+
+.hero__title,
+.hero__text {
+  margin: 0;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.catalog-layout {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.product-card__media {
+  display: block;
+}
+
+.product-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: auto;
+  padding-top: var(--space-sm);
+}
+
+.catalog-filters__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.contact-list {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.contact-list__item {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.route-list {
+  display: grid;
+  gap: var(--space-sm);
+  padding-left: var(--space-lg);
+}
+
+.product-details__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.product-card__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+/* ===============================
+   Подвал (мобильные)
+   =============================== */
+
+.site-footer__inner {
+  display: grid;
+  gap: var(--space-xl);
+  width: min(100% - 32px, var(--container-width));
+  margin-inline: auto;
+  padding-block: var(--space-xl);
+}
+
+.site-footer__list {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.site-footer__link {
+  display: inline-block;
+  padding-block: 4px;
+}
+
+.site-footer__contact {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.site-footer__social {
+  display: flex;
+  gap: var(--space-sm);
+  margin: var(--space-md) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer__social-link {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+}
+
+.site-footer__copy {
+  width: min(100% - 32px, var(--container-width));
+  margin-inline: auto;
+  padding-block: var(--space-md);
+}
+
+/* ===============================
+   Карта (мобильные)
+   =============================== */
+
+.map {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.map__frame {
+  width: 100%;
+  height: 100%;
+}
+
+.map-section__link {
+  display: inline-block;
+  margin-top: var(--space-md);
+}
+
+
+/* ===============================
+   4. Страница товара, таблица, отзывы (мобильные)
+   =============================== */
+
+.product-details {
+  display: grid;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.product-table {
+  width: 100%;
+  min-width: 640px;
+}
+
+.product-table--compact {
+  min-width: 0;
+}
+
+.reviews {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.faq {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+/* ===============================
+   5. Форма заявки (мобильные)
+   =============================== */
+
+.order-form {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.order-form__group {
+  display: grid;
+  align-content: start;
+  gap: var(--space-xs);
+}
+
+.order-form__label {
+  margin-bottom: 0;
+}
+
+.order-form__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.order-form__actions .button {
+  width: 100%;
+}
+
+.order-dialog {
+  width: min(100% - 32px, 560px);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+}
+
+/* Фильтры каталога */
+.catalog-filters__group {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+/* ===============================
+   6. Фиксированные элементы
+   =============================== */
+
+.to-top {
+  right: 16px;
+  bottom: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 56px;
+}
+
+/* ===============================
+   7. От 640px: небольшой планшет
+   =============================== */
+
+@media (min-width: 640px) {
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ===============================
+   8. От 768px: планшет
+   =============================== */
+
+@media (min-width: 768px) {
+  :root {
+    --header-height: 76px;
+  }
+
+  /* Шапка закрепляется только на планшете и desktop */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  /* Логотип и меню в одну строку */
+  .site-header__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: var(--header-height);
+    padding-block: var(--space-sm);
+  }
+
+  .site-nav {
+    width: auto;
+  }
+
+  .site-nav__link {
+    padding: 8px 14px;
+    font-size: 16px;
+  }
+
+  .map {
+    aspect-ratio: 16 / 9;
+  }
+
+  .contact-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .product-details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .reviews {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Форма: поля в две колонки, широкие поля занимают всю строку */
+  .order-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .order-form__group--wide,
+  .order-form__actions {
+    grid-column: 1 / -1;
+  }
+
+  .order-form__actions {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .order-form__actions .button {
+    width: auto;
+  }
+
+  /* Внутри модального окна форма остаётся в одну колонку */
+  .order-dialog .order-form {
+    grid-template-columns: 1fr;
+  }
+
+  .to-top {
+    right: 32px;
+    bottom: 32px;
+  }
+}
+
+/* ===============================
+   9. От 900px: hero в две колонки
+   =============================== */
+
+@media (min-width: 900px) {
+  /* Подвал в три колонки: меню по центру, ссылки выровнены влево */
+  .site-footer__inner {
+    grid-template-columns: 1.3fr 1fr 1.4fr;
+    gap: var(--space-xl);
+  }
+
+  .site-footer__nav {
+    justify-self: center;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
+  }
+}
+
+/* ===============================
+   10. От 1024px: desktop
+   =============================== */
+
+@media (min-width: 1024px) {
+  .map {
+    aspect-ratio: 21 / 9;
+  }
+
+  /* Лампочка висит ниже: хлебные крошки сдвигаем, чтобы она их не закрывала */
+  .breadcrumbs {
+    padding-left: 72px;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .reviews {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Каталог: фильтр слева, товары справа */
+  .catalog-layout {
+    grid-template-columns: 280px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .catalog-filters {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-md));
+    z-index: 1;
+  }
+
+  /* В каталоге рядом с фильтром остаётся две колонки карточек */
+  .catalog-products .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ===============================
+   11. От 1280px: широкий desktop
+   =============================== */
+
+@media (min-width: 1280px) {
+  .catalog-products .products-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

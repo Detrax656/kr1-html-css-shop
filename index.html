@@ -1,264 +1,269 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Главная страница учебного интернет-магазина.">
-        <title>Учебный интернет-магазин</title>
-        <link rel="stylesheet" href="css/style.css">
-        <script src="js/main.js" defer></script>
-        <meta property="og:type" content="website">
-        <meta property="og:title" content="Учебный интернет-магазин">
-        <meta property="og:description" content="Учебный frontend-проект интернет-магазина.">
-        <meta property="og:image" content="https://detrax656.github.io/kr1-html-css-shop/images/preview.jpg">
-    </head>
-    <body>
-        <header class="site-header">
-            <div class="site-header__inner">
-                <a class="site-header__logo" href="index.html">ShopProject</a>
-        
-                <nav class="site-nav" aria-label="Основная навигация">
-                    <ul class="site-nav__list">
-                        <li class="site-nav__item">
-                            <a class="site-nav__link site-nav__link--active" href="index.html">
-                                Главная
-                            </a>
-                        </li>
-                        <li class="site-nav__item">
-                            <a class="site-nav__link" href="catalog.html">Каталог</a>
-                        </li>
-                        <li class="site-nav__item">
-                            <a class="site-nav__link" href="product.html">Товар</a>
-                        </li>
-                        <li class="site-nav__item">
-                            <a class="site-nav__link" href="order.html">Заказ</a>
-                        </li>
-                        <li class="site-nav__item">
-                            <a class="site-nav__link" href="contacts.html">Контакты</a>
-                        </li>
-                        <li class="site-nav__item">
-                            <a class="site-nav__link" href="index.html#popular">
-                                Популярные товары
-                            </a>
-                        </li>
-                        <li class="site-nav__item">
-                            <a class="site-nav__link" href="index.html#advantages">Преимущества</a>
-                        </li>
-                    </ul>
-                </nav>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Накал — магазин дизайнерских ламп: настольные лампы, торшеры и подвесные светильники с доставкой по России.">
+  <title>Накал — магазин дизайнерских ламп</title>
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem('theme') || 'dark';
+    } catch (e) {}
+  </script>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/theme.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Накал — магазин дизайнерских ламп">
+  <meta property="og:description" content="Дизайнерские настольные лампы, торшеры и подвесные светильники. Доставка по России.">
+  <meta property="og:image" content="https://detrax656.github.io/kr1-html-css-shop/images/preview.jpg">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Перейти к основному содержимому</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="pull" id="pull" type="button" aria-label="Переключить тему оформления" aria-pressed="false">
+        <svg viewBox="0 0 60 330" aria-hidden="true" focusable="false">
+          <g id="swing">
+            <line class="pull__cord" id="cord" x1="30" y1="0" x2="30" y2="100"/>
+            <g id="bulb-group" transform="translate(30 100)">
+              <rect class="pull__socket" x="-6" y="0" width="12" height="14" rx="2"/>
+              <path class="pull__bulb" d="M-6 14 C-6 22 -14 26 -14 40 A14 14 0 0 0 14 40 C14 26 6 22 6 14 Z"/>
+              <g transform="translate(0 38)">
+                <circle class="pull__ring" r="22"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(0)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(45)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(90)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(135)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(180)"/>
+                <circle class="pull__hit" r="28"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </button>
+      <a class="site-header__logo" href="index.html"><svg class="site-header__mark" viewBox="0 0 40 48" width="30" height="36" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 2a16 16 0 0 0-9 29.2V36h18v-4.8A16 16 0 0 0 20 2z"/><path d="M13 36h14M15 41h10M16 45.5h8"/><path d="M13 9v18M27 9v18M13 18h5l1.5-3 3 6 1.5-3h3"/></g></svg><span>Накал</span></a>
+
+      <nav class="site-nav" aria-label="Основная навигация">
+        <ul class="site-nav__list">
+          <li class="site-nav__item">
+            <a class="site-nav__link site-nav__link--active" aria-current="page" href="index.html">Главная</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="catalog.html">Каталог</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="order.html">Заказ</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="contacts.html">Контакты</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero__content">
+        <h1 class="hero__title">Накал: магазин дизайнерских ламп</h1>
+        <p class="hero__text">
+          Настольные лампы, торшеры и подвесные светильники от независимых мастерских.
+          Тёплый свет и характер для дома, студии и офиса.
+        </p>
+        <a class="button" href="#popular">Перейти к товарам</a>
+      </div>
+
+      <picture>
+        <source media="(min-width: 1200px)" srcset="images/hero-desktop.jpg">
+        <source media="(min-width: 768px)" srcset="images/hero-tablet.jpg">
+        <img class="hero__image" src="images/hero-mobile.jpg" alt="Оранжевая настольная лампа в форме гриба светится на стопке книг"
+          width="640" height="480">
+      </picture>
+    </section>
+
+    <section class="section" id="advantages">
+      <h2 class="section__title">Почему «Накал»</h2>
+
+      <ul class="advantages-list">
+        <li class="advantages-list__item">только авторские модели и проверенные мастерские;</li>
+        <li class="advantages-list__item">гарантия 2 года на все светильники;</li>
+        <li class="advantages-list__item">доставка по Москве от 1 дня, по России — транспортными компаниями;</li>
+        <li class="advantages-list__item">14 дней на возврат, если лампа не подошла.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="popular">
+      <h2 class="section__title">Популярные товары</h2>
+      <div class="products-grid" id="popular-grid"></div>
+      <p><a class="button button--secondary" href="catalog.html">Весь каталог</a></p>
+    </section>
+
+    <section class="section" id="faq">
+      <h2 class="section__title">Часто задаваемые вопросы</h2>
+
+      <div class="faq">
+        <details class="faq__item">
+          <summary class="faq__question">Как оформить заказ?</summary>
+          <p class="faq__answer">
+            Нажмите «Заказать» у нужной лампы или перейдите на страницу «Заказ» и заполните форму.
+            Менеджер свяжется с вами, чтобы подтвердить заказ и согласовать доставку.
+          </p>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__question">Как связаться с магазином?</summary>
+          <p class="faq__answer">
+            Позвоните по телефону +7 (965) 123-67-69 или напишите на info@nakal-lamps.ru.
+            Все контакты и график работы указаны на странице «Контакты».
+          </p>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__question">Где посмотреть характеристики лампы?</summary>
+          <p class="faq__answer">
+            Откройте карточку нужного товара: в ней есть описание, комплектация,
+            таблица характеристик и отзывы покупателей.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <aside class="aside-info" id="delivery">
+      <h2 class="aside-info__title">Доставка, гарантия и возврат</h2>
+      <p class="aside-info__text">
+        Доставляем по Москве за 1–2 дня, по России — за 3–7 дней. На все светильники действует
+        гарантия 2 года. Если лампа не подошла, её можно вернуть в течение 14 дней.
+      </p>
+    </aside>
+
+    <section class="section map-section" id="map" aria-labelledby="map-title">
+      <h2 class="section__title" id="map-title">Как нас найти</h2>
+      <p class="map-section__text">Шоурум «Накал»: г. Москва, ул. Тверская, 12, стр. 1. Ежедневно, вход со двора.</p>
+      <div class="map">
+        <iframe class="map__frame" title="Карта: шоурум «Накал», Москва, ул. Тверская, 12"
+          src="https://yandex.ru/map-widget/v1/?ll=37.605700%2C55.764000&amp;z=16&amp;pt=37.605700%2C55.764000%2Cpm2orgl"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <a class="map-section__link" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%A2%D0%B2%D0%B5%D1%80%D1%81%D0%BA%D0%B0%D1%8F%2C%2012" target="_blank" rel="noopener">Открыть в Яндекс Картах</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <section class="site-footer__col site-footer__about" aria-labelledby="footer-about">
+        <h2 class="site-footer__title" id="footer-about">О магазине</h2>
+        <p class="site-footer__text">
+          «Накал» — магазин дизайнерских ламп. Настольные лампы, торшеры и подвесные
+          светильники от независимых мастерских, с доставкой по всей России.
+        </p>
+      </section>
+
+      <nav class="site-footer__col site-footer__nav" aria-labelledby="footer-nav">
+        <h2 class="site-footer__title" id="footer-nav">Навигация</h2>
+        <ul class="site-footer__list">
+          <li><a class="site-footer__link" href="index.html">Главная</a></li>
+          <li><a class="site-footer__link" href="catalog.html">Каталог</a></li>
+          <li><a class="site-footer__link" href="order.html">Заказ</a></li>
+          <li><a class="site-footer__link" href="contacts.html">Контакты</a></li>
+          <li><a class="site-footer__link" href="index.html#delivery">Доставка и гарантия</a></li>
+        </ul>
+      </nav>
+
+      <section class="site-footer__col" aria-labelledby="footer-contacts">
+        <h2 class="site-footer__title" id="footer-contacts">Контакты</h2>
+        <ul class="site-footer__list site-footer__contacts">
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>г. Москва, ул. Тверская, 12, стр. 1</span></li>
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><a class="site-footer__link" href="tel:+79651236769">+7 (965) 123-67-69</a></li>
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Пн–Сб 10:00–21:00, Вс 11:00–20:00</span></li>
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a class="site-footer__link" href="mailto:info@nakal-lamps.ru">info@nakal-lamps.ru</a></li>
+        </ul>
+
+        <ul class="site-footer__social" aria-label="Мы в соцсетях">
+          <li><a class="site-footer__social-link" href="https://max.ru/" target="_blank" rel="noopener" aria-label="Накал в MAX"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 4.6 16.7L21 21l-1.3-4.3A9 9 0 0 0 12 3z"/><path d="M8 15V9l4 4 4-4v6"/></svg></a></li>
+          <li><a class="site-footer__social-link" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Накал на YouTube"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></svg></a></li>
+          <li><a class="site-footer__social-link" href="https://t.me/" target="_blank" rel="noopener" aria-label="Накал в Telegram"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11l6 2.5L11 20l3-4 5 3z"/><path d="m9 13.5 12-9.5"/></svg></a></li>
+        </ul>
+      </section>
+    </div>
+
+    <p class="site-footer__copy">&copy; 2026 «Накал». Магазин дизайнерских ламп. Все права защищены.</p>
+  </footer>
+
+  <a class="to-top" href="#" aria-label="Наверх"><svg class="to-top__icon" viewBox="0 0 40 56" width="40" height="56" aria-hidden="true" focusable="false"><path d="M17.5 3h5L35 27H5z" fill="currentColor"/><path d="M20 27v23M11 52h18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></a>
+
+  <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
+        <button class="order-dialog__close" type="button" id="close-order-dialog-icon"
+            aria-label="Закрыть окно">&times;</button>
+
+        <h2 class="order-dialog__title" id="order-dialog-title">Оформление заявки</h2>
+
+        <p class="success-message" id="success-message" role="status" hidden>
+            Форма успешно отправлена!
+        </p>
+
+        <form class="order-form" id="order-form" action="#" method="post" novalidate>
+            <input id="selected-product" name="selected-product" type="hidden">
+
+            <div class="order-form__group">
+                <label class="order-form__label" for="order-name">Имя</label>
+                <input class="order-form__input" id="order-name" name="name" type="text" placeholder="Введите ваше имя"
+                    minlength="2" autocomplete="given-name" required>
             </div>
-        </header>
 
-        <main>
-            <section class="hero">
-                <h1 class="hero__title">Учебный интернет-магазин</h1>
-                <p class="hero__text">
-                    Это стартовая страница учебного frontend-проекта.
-                    В дальнейшем на её основе будет разработан многостраничный сайт
-                    интернет-магазина или каталога услуг.
-                </p>
-                <a class="button" href="#popular">Перейти к товарам</a>
-            </section>
+            <div class="order-form__group">
+                <label class="order-form__label" for="order-email">E-mail</label>
+                <input class="order-form__input" id="order-email" name="email" type="email"
+                    placeholder="example@mail.ru" autocomplete="email" required>
+            </div>
 
-            <section class="section" id="advantages">
-                <h2 class="section__title">Преимущества проекта</h2>
+            <div class="order-form__group">
+                <label class="order-form__label" for="order-phone">Телефон</label>
+                <input class="order-form__input" id="order-phone" name="phone" type="tel" inputmode="tel"
+                    placeholder="+7 (900) 000-00-00" pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" required>
+                <small class="order-form__hint">Формат: +7 (900) 000-00-00</small>
+            </div>
 
-                <ul class="advantages-list">
-                    <li class="advantages-list__item">понятная HTML-структура;</li>
-                    <li class="advantages-list__item">семантические блоки страницы;</li>
-                    <li class="advantages-list__item">подключение внешнего CSS-файла;</li>
-                    <li class="advantages-list__item">подготовка к разработке многостраничного сайта.</li>
-                </ul>
-            </section>
+            <div class="order-form__group">
+                <label class="order-form__label" for="order-date">Дата связи</label>
+                <input class="order-form__input" id="order-date" name="date" type="date">
+            </div>
 
-            <section class="section" id="popular">
-                <h2 class="section__title">Популярные товары</h2>
+            <div class="order-form__group">
+                <label class="order-form__label" for="order-topic">Тема заявки</label>
+                <select class="order-form__select" id="order-topic" name="topic" required>
+                    <option value="">Выберите тему</option>
+                    <option value="product">Заказ товара</option>
+                    <option value="consultation">Консультация</option>
+                    <option value="delivery">Доставка</option>
+                </select>
+            </div>
 
-                <div class="products-grid">
-                    <article class="product-card product-card--new">
-                        <span class="product-card__badge">Новинка</span>
-                        <h3 class="product-card__title">Товар 1</h3>
-                        <p class="product-card__category">Категория: Новинки</p>
-                        <p class="product-card__description">Краткое описание учебного товара.</p>
-                        <p class="product-card__price">Цена: 1000 руб.</p>
-                        <button class="button product-card__button" type="button" data-product="Товар 1">
-                            Заказать
-                        </button>
-                    </article>
-                    
-                    <article class="product-card product-card--hit">
-                        <span class="product-card__badge">Хит</span>
-                        <h3 class="product-card__title">Товар 2</h3>
-                        <p class="product-card__category">Категория: Популярные</p>
-                        <p class="product-card__description">Краткое описание учебного товара.</p>
-                        <p class="product-card__price">Цена: 1500 руб.</p>
-                        <button class="button product-card__button" type="button" data-product="Товар 2">
-                            Заказать
-                        </button>
-                    </article>
-                    
-                    <article class="product-card product-card--discount">
-                        <span class="product-card__badge">Скидка</span>
-                        <h3 class="product-card__title">Товар 3</h3>
-                        <p class="product-card__category">Категория: Акции</p>
-                        <p class="product-card__description">Краткое описание учебного товара.</p>
-                        <p class="product-card__price">Цена: 2000 руб.</p>
-                        <button class="button product-card__button" type="button" data-product="Товар 3">
-                            Заказать
-                        </button>
-                    </article>
+            <div class="order-form__group order-form__group--wide">
+                <label class="order-form__label" for="order-comment">Комментарий</label>
+                <textarea class="order-form__textarea" id="order-comment" name="comment" rows="4"
+                    placeholder="Укажите дополнительную информацию"></textarea>
+            </div>
 
-                </div>
-            </section>
+            <div class="order-form__group order-form__group--wide order-form__group--checkbox">
+                <label class="order-form__label">
+                    <input class="order-form__input" id="order-agreement" name="agreement" type="checkbox" required>
+                    Я согласен на обработку данных
+                </label>
+            </div>
 
-            <section class="section" id="faq">
-                <h2 class="section__title">Часто задаваемые вопросы</h2>
+            <div class="order-form__actions">
+                <button class="button button--secondary" type="button" id="close-order-dialog">Закрыть</button>
+                <button class="button button--primary" type="submit">Отправить заявку</button>
+            </div>
+        </form>
+    </dialog>
 
-                <div class="faq">
-                    <details class="faq__item">
-                        <summary class="faq__question">Как оформить заявку?</summary>
-                        <p class="faq__answer">
-                            Нажмите кнопку «Заказать» у нужного товара или перейдите
-                            на страницу «Заказ» и заполните форму.
-                        </p>
-                    </details>
+</body>
 
-                    <details class="faq__item">
-                        <summary class="faq__question">Как связаться с магазином?</summary>
-                        <p class="faq__answer">
-                            Телефон и e-mail указаны на странице «Контакты».
-                        </p>
-                    </details>
-
-                    <details class="faq__item">
-                        <summary class="faq__question">Где посмотреть характеристики товара?</summary>
-                        <p class="faq__answer">
-                            Характеристики представлены в таблице на странице «Товар».
-                        </p>
-                    </details>
-                </div>
-            </section>
-
-            <aside class="aside-info">
-                <h2 class="aside-info__title">Информация для студентов</h2>
-                <p class="aside-info__text">
-                    На следующих практических занятиях этот проект будет расширяться:
-                    появятся формы, модальное окно, дополнительные страницы, Flex/Grid,
-                    БЭМ-структура и адаптивная версия сайта.
-                </p>
-            </aside>
-        </main>
-
-        <footer class="site-footer" id="contacts">
-            <p class="site-footer__text">&copy; 2026 Учебный проект. Все права защищены.</p>
-            <p class="site-footer__text">Дисциплина: Фронтенд и бэкенд разработка</p>
-        </footer>
-
-        <a class="to-top" href="#">Наверх</a>
-
-        <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
-            <button class="order-dialog__close" type="button" id="close-order-dialog-icon" aria-label="Закрыть окно">&times;</button>
-
-            <h2 class="order-dialog__title" id="order-dialog-title">Оформление заявки</h2>
-
-            <p class="success-message" id="success-message" role="status" hidden>
-                Форма успешно отправлена!
-            </p>
-
-            <form class="order-form" id="order-form" action="#" method="post" novalidate>
-                <input id="selected-product" name="selected-product" type="hidden">
-
-                <div class="order-form__field">
-                    <label class="order-form__label" for="order-name">Имя</label>
-                    <input
-                        class="order-form__input"
-                        id="order-name"
-                        name="name"
-                        type="text"
-                        placeholder="Введите ваше имя"
-                        minlength="2"
-                        autocomplete="given-name"
-                        required
-                    >
-                </div>
-
-                <div class="order-form__field">
-                    <label class="order-form__label" for="order-email">E-mail</label>
-                    <input
-                        class="order-form__input"
-                        id="order-email"
-                        name="email"
-                        type="email"
-                        placeholder="example@mail.ru"
-                        autocomplete="email"
-                        required
-                    >
-                </div>
-
-                <div class="order-form__field">
-                    <label class="order-form__label" for="order-phone">Телефон</label>
-                    <input
-                        class="order-form__input"
-                        id="order-phone"
-                        name="phone"
-                        type="tel"
-                        inputmode="tel"
-                        placeholder="+7 (900) 000-00-00"
-                        pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$"
-                        required
-                    >
-                    <small class="order-form__hint">Формат: +7 (900) 000-00-00</small>
-                </div>
-
-                <div class="order-form__field">
-                    <label class="order-form__label" for="order-date">Дата связи</label>
-                    <input
-                        class="order-form__input"
-                        id="order-date"
-                        name="date"
-                        type="date"
-                    >
-                </div>
-
-                <div class="order-form__field">
-                    <label class="order-form__label" for="order-topic">Тема заявки</label>
-                    <select class="order-form__select" id="order-topic" name="topic" required>
-                        <option value="">Выберите тему</option>
-                        <option value="product">Заказ товара</option>
-                        <option value="consultation">Консультация</option>
-                        <option value="delivery">Доставка</option>
-                    </select>
-                </div>
-
-                <div class="order-form__field">
-                    <label class="order-form__label" for="order-comment">Комментарий</label>
-                    <textarea
-                        class="order-form__textarea"
-                        id="order-comment"
-                        name="comment"
-                        rows="4"
-                        placeholder="Укажите дополнительную информацию"
-                    ></textarea>
-                </div>
-
-                <div class="order-form__field order-form__field--checkbox">
-                    <label class="order-form__label">
-                        <input
-                            class="order-form__input"
-                            id="order-agreement"
-                            name="agreement"
-                            type="checkbox"
-                            required
-                        >
-                        Я согласен на обработку данных
-                    </label>
-                </div>
-
-                <div class="order-form__actions">
-                    <button class="button button--secondary" type="button" id="close-order-dialog">Закрыть</button>
-                    <button class="button button--primary" type="submit">Отправить заявку</button>
-                </div>
-            </form>
-        </dialog>
-    </body>
 </html>
