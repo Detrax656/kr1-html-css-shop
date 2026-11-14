@@ -54,4 +54,4 @@ HTML, CSS (переменные, Flexbox, Grid, БЭМ), JavaScript без би�
 
 ## Ссылка на опубликованный проект
 
-GitHub Pages: <https://detrax656.github.io/kr1-html-css-shop/>
+GitHub Pages: https://gmirea656.github.io/kr1-html-css-shop/
