@@ -142,7 +142,7 @@ function createProductCard(product, withOrderButton) {
     <div class="product-card__actions">
       <a class="button" href="${link}">Подробнее</a>
       ${withOrderButton && product.inStock
-        ? `<button class="button button--secondary product-card__button" type="button" data-product="${product.name}">Заказать</button>`
+        ? `<button class="button button--secondary product-card__button" type="button" data-id="${product.id}">Заказать</button>`
         : ''}
     </div>`;
 
@@ -282,7 +282,9 @@ function createProductPageHtml(product) {
           <p class="product-details__availability${product.inStock ? '' : ' product-details__availability--no'}">
             ${product.inStock ? 'В наличии' : 'Нет в наличии'}
           </p>
-          <a class="button" href="order.html">Оставить заявку</a>
+          ${product.inStock
+            ? `<a class="button" href="order.html?id=${product.id}">Оформить заказ</a>`
+            : ''}
         </div>
       </article>
     </section>
@@ -341,19 +343,83 @@ function createProductPageHtml(product) {
 logProductReport(products);
 
 /* ===============================
-   5. Модальное окно заявки (главная страница)
+   5. Заказ: общие функции
+   =============================== */
+
+const DELIVERY_PRICE = 500;
+const FREE_DELIVERY_FROM = 10000;
+const MAX_QUANTITY = 10;
+
+// Стоимость доставки: курьер платный до 10 000 ₽, самовывоз бесплатный.
+function calculateDelivery(subtotal, method) {
+  if (method !== 'courier') {
+    return 0;
+  }
+
+  return subtotal >= FREE_DELIVERY_FROM ? 0 : DELIVERY_PRICE;
+}
+
+function readQuantity(input) {
+  const value = Math.floor(Number(input.value)) || 1;
+  return Math.min(MAX_QUANTITY, Math.max(1, value));
+}
+
+// Мини-карточка товара для окна быстрого заказа и сводки заказа.
+function createOrderItemHtml(product, quantity) {
+  const unit = calculateFinalPrice(product.price, product.discount);
+
+  return `
+    <img class="order-item__image" src="${getImageSet(product.id).src}" alt="${product.alt}" width="96" height="72">
+    <div class="order-item__info">
+      <p class="order-item__name">${product.name}</p>
+      <p class="order-item__meta">${PRODUCT_TYPES[product.type]}</p>
+      <p class="order-item__price">${formatPrice(unit)} × ${quantity}</p>
+    </div>`;
+}
+
+// Проверка формы: помечаем неверные поля через aria-invalid.
+function validateForm(form) {
+  const elements = Array.from(form.elements).filter((element) => element.willValidate);
+
+  elements.forEach((element) => element.removeAttribute('aria-invalid'));
+
+  if (form.checkValidity()) {
+    return true;
+  }
+
+  elements.forEach((element) => {
+    if (!element.checkValidity()) {
+      element.setAttribute('aria-invalid', 'true');
+    }
+  });
+
+  form.reportValidity();
+  return false;
+}
+
+/* ===============================
+   6. Окно быстрого заказа (главная и каталог)
    =============================== */
 
 const orderDialog = document.getElementById('order-dialog');
-const closeDialogButton = document.getElementById('close-order-dialog');
-const closeDialogIcon = document.getElementById('close-order-dialog-icon');
-const orderDialogTitle = document.getElementById('order-dialog-title');
-const selectedProductInput = document.getElementById('selected-product');
-const orderForm = document.getElementById('order-form');
-const successMessage = document.getElementById('success-message');
 
-// Модальное окно есть только на главной странице.
 if (orderDialog) {
+  const quickForm = document.getElementById('quick-form');
+  const quickItem = document.getElementById('quick-item');
+  const quickQty = document.getElementById('quick-qty');
+  const quickTotal = document.getElementById('quick-total');
+  const quickSuccess = document.getElementById('quick-success');
+  const quickFull = document.getElementById('quick-full');
+  let quickProduct = null;
+
+  const updateQuick = () => {
+    const quantity = readQuantity(quickQty);
+    const total = calculateFinalPrice(quickProduct.price, quickProduct.discount) * quantity;
+
+    quickItem.innerHTML = createOrderItemHtml(quickProduct, quantity);
+    quickTotal.textContent = `Итого: ${formatPrice(total)}`;
+  };
+
   // Карточки создаются скриптом, поэтому слушаем клик на всём документе.
   document.addEventListener('click', (event) => {
     const button = event.target.closest('.product-card__button');
@@ -362,25 +428,32 @@ if (orderDialog) {
       return;
     }
 
-    const productName = button.dataset.product;
+    quickProduct = products.find((product) => product.id === Number(button.dataset.id));
 
-    selectedProductInput.value = productName;
-    orderDialogTitle.textContent = `Заявка: ${productName}`;
-
-    // При каждом открытии показываем форму и прячем прошлое сообщение.
-    successMessage.hidden = true;
-    orderForm.hidden = false;
+    quickForm.reset();
+    quickForm.hidden = false;
+    quickSuccess.hidden = true;
+    quickFull.href = `order.html?id=${quickProduct.id}`;
+    updateQuick();
 
     orderDialog.showModal();
   });
 
-  closeDialogButton.addEventListener('click', () => {
-    orderDialog.close();
+  quickQty.addEventListener('input', updateQuick);
+
+  quickForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    if (!validateForm(quickForm)) {
+      return;
+    }
+
+    quickForm.hidden = true;
+    quickSuccess.hidden = false;
   });
 
-  closeDialogIcon.addEventListener('click', () => {
-    orderDialog.close();
-  });
+  document.getElementById('close-order-dialog').addEventListener('click', () => orderDialog.close());
+  document.getElementById('close-order-dialog-icon').addEventListener('click', () => orderDialog.close());
 
   // Закрываем окно по клику на затемнённый фон.
   orderDialog.addEventListener('click', (event) => {
@@ -403,44 +476,109 @@ if (orderDialog) {
 }
 
 /* ===============================
-   6. Отправка формы заявки
+   7. Страница оформления заказа
    =============================== */
 
+const orderForm = document.getElementById('order-form');
+
 if (orderForm) {
+  const productSelect = document.getElementById('order-product');
+  const qtyInput = document.getElementById('order-qty');
+  const deliveryFields = document.getElementById('delivery-fields');
+  const summaryItem = document.getElementById('summary-item');
+  const submitButton = document.getElementById('order-submit');
+  const success = document.getElementById('order-success');
+
+  // Список товаров в выпадающем списке: цена уже со скидкой.
+  products.forEach((product) => {
+    const option = document.createElement('option');
+    const price = formatPrice(calculateFinalPrice(product.price, product.discount));
+
+    option.value = product.id;
+    option.textContent = product.inStock ? `${product.name}, ${price}` : `${product.name}, нет в наличии`;
+    option.disabled = !product.inStock;
+    productSelect.append(option);
+  });
+
+  const idFromUrl = Number(new URLSearchParams(window.location.search).get('id'));
+  const preselected = products.find((product) => product.id === idFromUrl && product.inStock);
+
+  if (preselected) {
+    productSelect.value = preselected.id;
+  }
+
+  const updateSummary = () => {
+    const product = products.find((item) => item.id === Number(productSelect.value));
+    const quantity = readQuantity(qtyInput);
+    const method = orderForm.elements.delivery.value;
+    const isCourier = method === 'courier';
+
+    // Поля адреса нужны только для курьера.
+    deliveryFields.hidden = !isCourier;
+    deliveryFields.querySelectorAll('input').forEach((input) => {
+      input.disabled = !isCourier;
+    });
+
+    if (!product) {
+      summaryItem.innerHTML = '<p class="order-summary__empty">Выберите лампу, чтобы увидеть состав заказа.</p>';
+      document.getElementById('summary-subtotal').textContent = formatPrice(0);
+      document.getElementById('summary-delivery').textContent = formatPrice(0);
+      document.getElementById('summary-total').textContent = formatPrice(0);
+      submitButton.textContent = 'Оформить заказ';
+      return null;
+    }
+
+    const subtotal = calculateFinalPrice(product.price, product.discount) * quantity;
+    const delivery = calculateDelivery(subtotal, method);
+
+    summaryItem.innerHTML = createOrderItemHtml(product, quantity);
+    document.getElementById('summary-subtotal').textContent = formatPrice(subtotal);
+    document.getElementById('summary-delivery').textContent = delivery === 0 ? 'Бесплатно' : formatPrice(delivery);
+    document.getElementById('summary-total').textContent = formatPrice(subtotal + delivery);
+    submitButton.textContent = `Оформить заказ · ${formatPrice(subtotal + delivery)}`;
+
+    return { product, quantity, delivery, total: subtotal + delivery, isCourier };
+  };
+
+  orderForm.addEventListener('input', updateSummary);
+  orderForm.addEventListener('change', updateSummary);
+
+  // Кнопки «−» и «+» у количества.
+  orderForm.querySelectorAll('.qty__button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const next = readQuantity(qtyInput) + Number(button.dataset.step);
+
+      qtyInput.value = Math.min(MAX_QUANTITY, Math.max(1, next));
+      updateSummary();
+    });
+  });
+
   orderForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const formElements = Array.from(orderForm.elements);
+    const order = updateSummary();
 
-    formElements.forEach((element) => {
-      if (element.willValidate) {
-        element.removeAttribute('aria-invalid');
-      }
-    });
-
-    if (!orderForm.checkValidity()) {
-      formElements.forEach((element) => {
-        if (element.willValidate && !element.checkValidity()) {
-          element.setAttribute('aria-invalid', 'true');
-        }
-      });
-
-      orderForm.reportValidity();
+    if (!validateForm(orderForm) || !order) {
       return;
     }
 
-    successMessage.hidden = false;
-    orderForm.reset();
+    const number = `NK-${String(Date.now()).slice(-6)}`;
+    const way = order.isCourier ? 'Доставим курьером' : 'Заберёте в шоуруме на Тверской, 12';
 
-    // В модальном окне сообщение показывается вместо формы.
-    if (orderDialog) {
-      orderForm.hidden = true;
-    }
+    document.getElementById('order-success-text').textContent =
+      `Заказ № ${number}: ${order.product.name} × ${order.quantity}, итого ${formatPrice(order.total)}. ` +
+      `${way}. Менеджер свяжется с вами для подтверждения.`;
+
+    orderForm.hidden = true;
+    success.hidden = false;
+    document.getElementById('order-success-title').focus();
   });
+
+  updateSummary();
 }
 
 /* ===============================
-   7. Кнопка «Наверх»
+   8. Кнопка «Наверх»
    =============================== */
 
 const toTop = document.querySelector('.to-top');

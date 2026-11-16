@@ -960,3 +960,175 @@ a:focus-visible {
 .skip-link:focus-visible {
   top: 16px;
 }
+
+/* Оформление заказа */
+.order-form__section {
+  margin: 0;
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.order-form__legend {
+  padding-inline: var(--space-xs);
+  font-weight: 700;
+}
+
+.order-choice {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  cursor: pointer;
+}
+
+.order-choice:has(input:checked) {
+  border-color: var(--color-primary);
+}
+
+.order-choice input {
+  accent-color: var(--color-primary);
+}
+
+.qty__button {
+  font: inherit;
+  font-size: 20px;
+  color: var(--color-text);
+  background-color: var(--color-surface-accent);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.qty__button:hover {
+  border-color: var(--color-primary);
+}
+
+.qty__input {
+  font: inherit;
+  text-align: center;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-inline: none;
+}
+
+.order-item__image {
+  background-color: #ffffff;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.order-item__name {
+  margin: 0;
+  font-weight: 700;
+}
+
+.order-item__meta,
+.order-item__price,
+.order-summary__empty {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.order-summary {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.order-summary__title {
+  margin-top: 0;
+}
+
+.order-summary__list {
+  margin: 0;
+}
+
+.order-summary__row dt {
+  color: var(--color-muted);
+}
+
+.order-summary__row dd {
+  margin: 0;
+}
+
+.order-summary__row--total {
+  font-weight: 700;
+  font-size: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.order-summary__row--total dt {
+  color: var(--color-text);
+}
+
+.order-total {
+  margin: 0;
+  font-weight: 700;
+}
+
+.order-success {
+  background-color: var(--color-success-bg);
+  border-left: 4px solid var(--color-success);
+  border-radius: var(--radius-md);
+}
+
+.order-success__title {
+  margin-top: 0;
+}
+
+.order-dialog__full {
+  color: var(--color-link);
+}
+
+/* Страница «О нас» */
+.about-intro__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+
+.about-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.about-card__title {
+  margin-top: 0;
+}
+
+.about-card__text {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.about-stats__item {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.about-stats__label {
+  color: var(--color-muted);
+}
+
+.about-stats__value {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--color-link);
+}
+
+.about-steps__item {
+  color: var(--color-muted);
+}
+
+.about-steps__item strong {
+  color: var(--color-text);
+}
+
+/* Атрибут hidden должен скрывать элемент, даже если у него задан display */
+[hidden] {
+  display: none !important;
+}

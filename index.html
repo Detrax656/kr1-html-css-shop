@@ -58,6 +58,9 @@
             <a class="site-nav__link" href="catalog.html">Каталог</a>
           </li>
           <li class="site-nav__item">
+            <a class="site-nav__link" href="about.html">О нас</a>
+          </li>
+          <li class="site-nav__item">
             <a class="site-nav__link" href="order.html">Заказ</a>
           </li>
           <li class="site-nav__item">
@@ -142,16 +145,6 @@
       </p>
     </aside>
 
-    <section class="section map-section" id="map" aria-labelledby="map-title">
-      <h2 class="section__title" id="map-title">Как нас найти</h2>
-      <p class="map-section__text">Шоурум «Накал»: г. Москва, ул. Тверская, 12, стр. 1. Ежедневно, вход со двора.</p>
-      <div class="map">
-        <iframe class="map__frame" title="Карта: шоурум «Накал», Москва, ул. Тверская, 12"
-          src="https://yandex.ru/map-widget/v1/?ll=37.605700%2C55.764000&amp;z=16&amp;pt=37.605700%2C55.764000%2Cpm2orgl"
-          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-      <a class="map-section__link" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%A2%D0%B2%D0%B5%D1%80%D1%81%D0%BA%D0%B0%D1%8F%2C%2012" target="_blank" rel="noopener">Открыть в Яндекс Картах</a>
-    </section>
   </main>
 
   <footer class="site-footer">
@@ -169,6 +162,7 @@
         <ul class="site-footer__list">
           <li><a class="site-footer__link" href="index.html">Главная</a></li>
           <li><a class="site-footer__link" href="catalog.html">Каталог</a></li>
+          <li><a class="site-footer__link" href="about.html">О нас</a></li>
           <li><a class="site-footer__link" href="order.html">Заказ</a></li>
           <li><a class="site-footer__link" href="contacts.html">Контакты</a></li>
           <li><a class="site-footer__link" href="index.html#delivery">Доставка и гарантия</a></li>
@@ -196,73 +190,54 @@
   </footer>
 
   <a class="to-top" href="#" aria-label="Наверх"><svg class="to-top__icon" viewBox="0 0 40 56" width="40" height="56" aria-hidden="true" focusable="false"><path d="M17.5 3h5L35 27H5z" fill="currentColor"/><path d="M20 27v23M11 52h18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></a>
-
   <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
-        <button class="order-dialog__close" type="button" id="close-order-dialog-icon"
-            aria-label="Закрыть окно">&times;</button>
+    <button class="order-dialog__close" type="button" id="close-order-dialog-icon" aria-label="Закрыть окно">&times;</button>
 
-        <h2 class="order-dialog__title" id="order-dialog-title">Оформление заявки</h2>
+    <h2 class="order-dialog__title" id="order-dialog-title">Быстрый заказ</h2>
 
-        <p class="success-message" id="success-message" role="status" hidden>
-            Форма успешно отправлена!
-        </p>
+    <div class="order-item" id="quick-item"></div>
 
-        <form class="order-form" id="order-form" action="#" method="post" novalidate>
-            <input id="selected-product" name="selected-product" type="hidden">
+    <form class="order-form" id="quick-form" action="#" method="post" novalidate>
+      <div class="order-form__group">
+        <label class="order-form__label" for="quick-name">Имя</label>
+        <input class="order-form__input" id="quick-name" name="name" type="text" placeholder="Введите ваше имя"
+          minlength="2" autocomplete="given-name" required>
+      </div>
 
-            <div class="order-form__group">
-                <label class="order-form__label" for="order-name">Имя</label>
-                <input class="order-form__input" id="order-name" name="name" type="text" placeholder="Введите ваше имя"
-                    minlength="2" autocomplete="given-name" required>
-            </div>
+      <div class="order-form__group">
+        <label class="order-form__label" for="quick-phone">Телефон</label>
+        <input class="order-form__input" id="quick-phone" name="phone" type="tel" inputmode="tel"
+          placeholder="+7 (900) 000-00-00" pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" autocomplete="tel" required>
+        <small class="order-form__hint">Формат: +7 (900) 000-00-00</small>
+      </div>
 
-            <div class="order-form__group">
-                <label class="order-form__label" for="order-email">E-mail</label>
-                <input class="order-form__input" id="order-email" name="email" type="email"
-                    placeholder="example@mail.ru" autocomplete="email" required>
-            </div>
+      <div class="order-form__group">
+        <label class="order-form__label" for="quick-qty">Количество</label>
+        <input class="order-form__input" id="quick-qty" name="quantity" type="number" min="1" max="10" value="1"
+          inputmode="numeric" required>
+      </div>
 
-            <div class="order-form__group">
-                <label class="order-form__label" for="order-phone">Телефон</label>
-                <input class="order-form__input" id="order-phone" name="phone" type="tel" inputmode="tel"
-                    placeholder="+7 (900) 000-00-00" pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" required>
-                <small class="order-form__hint">Формат: +7 (900) 000-00-00</small>
-            </div>
+      <div class="order-form__group order-form__group--wide order-form__group--checkbox">
+        <label class="order-form__label">
+          <input class="order-form__input" id="quick-agreement" name="agreement" type="checkbox" required>
+          Я согласен на обработку данных
+        </label>
+      </div>
 
-            <div class="order-form__group">
-                <label class="order-form__label" for="order-date">Дата связи</label>
-                <input class="order-form__input" id="order-date" name="date" type="date">
-            </div>
+      <p class="order-total" id="quick-total" role="status"></p>
 
-            <div class="order-form__group">
-                <label class="order-form__label" for="order-topic">Тема заявки</label>
-                <select class="order-form__select" id="order-topic" name="topic" required>
-                    <option value="">Выберите тему</option>
-                    <option value="product">Заказ товара</option>
-                    <option value="consultation">Консультация</option>
-                    <option value="delivery">Доставка</option>
-                </select>
-            </div>
+      <div class="order-form__actions">
+        <button class="button button--secondary" type="button" id="close-order-dialog">Закрыть</button>
+        <button class="button button--primary" type="submit">Заказать</button>
+      </div>
 
-            <div class="order-form__group order-form__group--wide">
-                <label class="order-form__label" for="order-comment">Комментарий</label>
-                <textarea class="order-form__textarea" id="order-comment" name="comment" rows="4"
-                    placeholder="Укажите дополнительную информацию"></textarea>
-            </div>
+      <a class="order-dialog__full" id="quick-full" href="order.html">Полное оформление заказа</a>
+    </form>
 
-            <div class="order-form__group order-form__group--wide order-form__group--checkbox">
-                <label class="order-form__label">
-                    <input class="order-form__input" id="order-agreement" name="agreement" type="checkbox" required>
-                    Я согласен на обработку данных
-                </label>
-            </div>
-
-            <div class="order-form__actions">
-                <button class="button button--secondary" type="button" id="close-order-dialog">Закрыть</button>
-                <button class="button button--primary" type="submit">Отправить заявку</button>
-            </div>
-        </form>
-    </dialog>
+    <p class="success-message" id="quick-success" role="status" hidden>
+      Спасибо! Заказ принят, менеджер перезвонит вам в течение 15 минут.
+    </p>
+  </dialog>
 
 </body>
 

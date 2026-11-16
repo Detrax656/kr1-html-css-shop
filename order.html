@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Форма заявки магазина дизайнерских ламп «Накал».">
-  <title>Заявка — Накал</title>
+  <title>Оформление заказа — Накал</title>
   <script>
     try {
       document.documentElement.dataset.theme = localStorage.getItem('theme') || 'dark';
@@ -58,6 +58,9 @@
             <a class="site-nav__link" href="catalog.html">Каталог</a>
           </li>
           <li class="site-nav__item">
+            <a class="site-nav__link" href="about.html">О нас</a>
+          </li>
+          <li class="site-nav__item">
             <a class="site-nav__link site-nav__link--active" aria-current="page" href="order.html">Заказ</a>
           </li>
           <li class="site-nav__item">
@@ -71,64 +74,109 @@
   <main id="main">
     <nav class="breadcrumbs" aria-label="Хлебные крошки">
       <a class="breadcrumbs__link" href="index.html">Главная</a>
-      <span class="breadcrumbs__current" aria-current="page">Заказ</span>
+      <span class="breadcrumbs__current" aria-current="page">Оформление заказа</span>
     </nav>
 
     <section class="section">
-      <h1>Оформление заявки</h1>
+      <h1>Оформление заказа</h1>
 
-      <form class="order-form" id="order-form" action="#" method="post" novalidate>
-        <div class="order-form__group">
-          <label class="order-form__label" for="order-name">Имя</label>
-          <input class="order-form__input" id="order-name" name="name" type="text" placeholder="Введите ваше имя"
-            minlength="2" autocomplete="given-name" required>
+      <div class="checkout">
+        <form class="order-form" id="order-form" action="#" method="post" novalidate>
+          <fieldset class="order-form__section">
+            <legend class="order-form__legend">Товар</legend>
+            <div class="order-form__group">
+              <label class="order-form__label" for="order-product">Лампа</label>
+              <select class="order-form__select" id="order-product" name="product" required><option value="">Выберите товар</option></select>
+            </div>
+            <div class="order-form__group">
+              <label class="order-form__label" for="order-qty">Количество</label>
+              <div class="qty">
+                <button class="qty__button" type="button" data-step="-1" aria-label="Уменьшить количество">−</button>
+                <input class="qty__input" id="order-qty" name="quantity" type="number" min="1" max="10" value="1" inputmode="numeric" required>
+                <button class="qty__button" type="button" data-step="1" aria-label="Увеличить количество">+</button>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="order-form__section">
+            <legend class="order-form__legend">Контактные данные</legend>
+            <div class="order-form__group">
+              <label class="order-form__label" for="order-name">Имя</label>
+              <input class="order-form__input" id="order-name" name="name" type="text" placeholder="Введите ваше имя" minlength="2" autocomplete="given-name" required>
+            </div>
+            <div class="order-form__group">
+              <label class="order-form__label" for="order-phone">Телефон</label>
+              <input class="order-form__input" id="order-phone" name="phone" type="tel" inputmode="tel" placeholder="+7 (900) 000-00-00" pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" autocomplete="tel" required>
+              <small class="order-form__hint">Формат: +7 (900) 000-00-00</small>
+            </div>
+            <div class="order-form__group">
+              <label class="order-form__label" for="order-email">E-mail</label>
+              <input class="order-form__input" id="order-email" name="email" type="email" placeholder="example@mail.ru" autocomplete="email" required>
+            </div>
+          </fieldset>
+
+          <fieldset class="order-form__section">
+            <legend class="order-form__legend">Доставка</legend>
+            <div class="order-form__choices order-form__group--wide">
+              <label class="order-choice"><input type="radio" name="delivery" value="courier" checked> Курьером: 500 ₽, бесплатно от 10 000 ₽</label>
+              <label class="order-choice"><input type="radio" name="delivery" value="pickup"> Самовывоз из шоурума: бесплатно</label>
+            </div>
+            <div class="order-form__fields order-form__group--wide" id="delivery-fields">
+            <div class="order-form__group">
+              <label class="order-form__label" for="order-city">Город</label>
+              <input class="order-form__input" id="order-city" name="city" type="text" value="Москва" autocomplete="address-level2" required>
+            </div>
+            <div class="order-form__group">
+              <label class="order-form__label" for="order-date">Дата доставки</label>
+              <input class="order-form__input" id="order-date" name="date" type="date">
+            </div>
+              <div class="order-form__group order-form__group--wide">
+                <label class="order-form__label" for="order-address">Адрес</label>
+                <input class="order-form__input" id="order-address" name="address" type="text" placeholder="Улица, дом, квартира" autocomplete="street-address" required>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="order-form__section">
+            <legend class="order-form__legend">Оплата</legend>
+            <div class="order-form__choices order-form__group--wide">
+              <label class="order-choice"><input type="radio" name="payment" value="cash" checked> При получении</label>
+              <label class="order-choice"><input type="radio" name="payment" value="card"> Онлайн картой</label>
+            </div>
+            <div class="order-form__group order-form__group--wide">
+              <label class="order-form__label" for="order-comment">Комментарий к заказу</label>
+              <textarea class="order-form__textarea" id="order-comment" name="comment" rows="3" placeholder="Удобное время, этаж, пожелания"></textarea>
+            </div>
+          </fieldset>
+
+          <div class="order-form__group order-form__group--wide order-form__group--checkbox">
+            <label class="order-form__label">
+              <input class="order-form__input" id="order-agreement" name="agreement" type="checkbox" required>
+              Я согласен на обработку данных
+            </label>
+          </div>
+
+          <div class="order-form__actions">
+            <button class="button button--primary" type="submit" id="order-submit">Оформить заказ</button>
+          </div>
+        </form>
+
+        <div class="order-success" id="order-success" role="status" hidden>
+          <h2 class="order-success__title" id="order-success-title" tabindex="-1">Спасибо за заказ!</h2>
+          <p id="order-success-text"></p>
+          <a class="button" href="catalog.html">Вернуться в каталог</a>
         </div>
 
-        <div class="order-form__group">
-          <label class="order-form__label" for="order-email">E-mail</label>
-          <input class="order-form__input" id="order-email" name="email" type="email" placeholder="example@mail.ru"
-            autocomplete="email" required>
-        </div>
-
-        <div class="order-form__group">
-          <label class="order-form__label" for="order-phone">Телефон</label>
-          <input class="order-form__input" id="order-phone" name="phone" type="tel" inputmode="tel"
-            placeholder="+7 (900) 000-00-00" pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" required>
-          <small class="order-form__hint">Формат: +7 (900) 000-00-00</small>
-        </div>
-
-        <div class="order-form__group">
-          <label class="order-form__label" for="order-date">Дата связи</label>
-          <input class="order-form__input" id="order-date" name="date" type="date">
-        </div>
-
-        <div class="order-form__group">
-          <label class="order-form__label" for="order-topic">Тема заявки</label>
-          <select class="order-form__select" id="order-topic" name="topic" required>
-            <option value="">Выберите тему</option>
-            <option value="product">Заказ товара</option>
-            <option value="consultation">Консультация</option>
-            <option value="delivery">Доставка</option>
-          </select>
-        </div>
-
-        <div class="order-form__group order-form__group--wide">
-          <label class="order-form__label" for="order-comment">Комментарий</label>
-          <textarea class="order-form__textarea" id="order-comment" name="comment" rows="4"
-            placeholder="Укажите дополнительную информацию"></textarea>
-        </div>
-
-        <div class="order-form__group order-form__group--wide order-form__group--checkbox">
-          <label class="order-form__label">
-            <input class="order-form__input" id="order-agreement" name="agreement" type="checkbox" required>
-            Я согласен на обработку данных
-          </label>
-        </div>
-
-        <div class="order-form__actions">
-          <button class="button button--primary" type="submit">Отправить заявку</button>
-        </div>
-      </form>
+        <aside class="order-summary" aria-labelledby="summary-title">
+          <h2 class="order-summary__title" id="summary-title">Ваш заказ</h2>
+          <div class="order-item" id="summary-item"></div>
+          <dl class="order-summary__list">
+            <div class="order-summary__row"><dt>Товары</dt><dd id="summary-subtotal">0 ₽</dd></div>
+            <div class="order-summary__row"><dt>Доставка</dt><dd id="summary-delivery">0 ₽</dd></div>
+            <div class="order-summary__row order-summary__row--total"><dt>Итого</dt><dd id="summary-total">0 ₽</dd></div>
+          </dl>
+        </aside>
+      </div>
     </section>
   </main>
 
@@ -147,6 +195,7 @@
         <ul class="site-footer__list">
           <li><a class="site-footer__link" href="index.html">Главная</a></li>
           <li><a class="site-footer__link" href="catalog.html">Каталог</a></li>
+          <li><a class="site-footer__link" href="about.html">О нас</a></li>
           <li><a class="site-footer__link" href="order.html">Заказ</a></li>
           <li><a class="site-footer__link" href="contacts.html">Контакты</a></li>
           <li><a class="site-footer__link" href="index.html#delivery">Доставка и гарантия</a></li>
@@ -174,10 +223,6 @@
   </footer>
 
   <a class="to-top" href="#" aria-label="Наверх"><svg class="to-top__icon" viewBox="0 0 40 56" width="40" height="56" aria-hidden="true" focusable="false"><path d="M17.5 3h5L35 27H5z" fill="currentColor"/><path d="M20 27v23M11 52h18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></a>
-
-  <p class="success-message" id="success-message" hidden>
-    Форма успешно отправлена!
-  </p>
 
 </body>
 

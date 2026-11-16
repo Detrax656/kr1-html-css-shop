@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="О магазине «Накал»: история, принципы и ассортимент дизайнерских ламп.">
+  <title>О нас — Накал</title>
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem('theme') || 'dark';
+    } catch (e) {}
+  </script>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/theme.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Накал — магазин дизайнерских ламп">
+  <meta property="og:description" content="Дизайнерские настольные лампы, торшеры и подвесные светильники. Доставка по России.">
+  <meta property="og:image" content="https://detrax656.github.io/kr1-html-css-shop/images/preview.jpg">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Перейти к основному содержимому</a>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <button class="pull" id="pull" type="button" aria-label="Переключить тему оформления" aria-pressed="false">
+        <svg viewBox="0 0 60 330" aria-hidden="true" focusable="false">
+          <g id="swing">
+            <line class="pull__cord" id="cord" x1="30" y1="0" x2="30" y2="100"/>
+            <g id="bulb-group" transform="translate(30 100)">
+              <rect class="pull__socket" x="-6" y="0" width="12" height="14" rx="2"/>
+              <path class="pull__bulb" d="M-6 14 C-6 22 -14 26 -14 40 A14 14 0 0 0 14 40 C14 26 6 22 6 14 Z"/>
+              <g transform="translate(0 38)">
+                <circle class="pull__ring" r="22"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(0)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(45)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(90)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(135)"/>
+                <line class="pull__ray" x1="26" y1="0" x2="36" y2="0" transform="rotate(180)"/>
+                <circle class="pull__hit" r="28"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </button>
+      <a class="site-header__logo" href="index.html"><svg class="site-header__mark" viewBox="0 0 40 48" width="30" height="36" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 2a16 16 0 0 0-9 29.2V36h18v-4.8A16 16 0 0 0 20 2z"/><path d="M13 36h14M15 41h10M16 45.5h8"/><path d="M13 9v18M27 9v18M13 18h5l1.5-3 3 6 1.5-3h3"/></g></svg><span>Накал</span></a>
+
+      <nav class="site-nav" aria-label="Основная навигация">
+        <ul class="site-nav__list">
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="index.html">Главная</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="catalog.html">Каталог</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link site-nav__link--active" aria-current="page" href="about.html">О нас</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="order.html">Заказ</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="contacts.html">Контакты</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <a class="breadcrumbs__link" href="index.html">Главная</a>
+      <span class="breadcrumbs__current" aria-current="page">О нас</span>
+    </nav>
+
+    <section class="section about-intro">
+      <div class="about-intro__text">
+        <h1>О магазине «Накал»</h1>
+        <p>
+          «Накал» появился в 2019 году как небольшая подборка авторских ламп для друзей-дизайнеров.
+          Сегодня это магазин, где можно найти настольные лампы, торшеры и подвесные светильники
+          от независимых мастерских, которые не встретишь в крупных сетях.
+        </p>
+        <p>
+          Мы верим, что свет формирует настроение комнаты не меньше, чем мебель. Поэтому выбираем
+          только те модели, на которые приятно смотреть и когда они выключены.
+        </p>
+        <a class="button" href="catalog.html">Перейти в каталог</a>
+      </div>
+
+      <img class="about-intro__image" src="images/hero-tablet.jpg"
+        alt="Оранжевая настольная лампа светится на стопке книг" width="768" height="576" loading="lazy">
+    </section>
+
+    <section class="section" aria-labelledby="values-title">
+      <h2 class="section__title" id="values-title">Наши принципы</h2>
+
+      <div class="about-grid">
+        <article class="about-card">
+          <h3 class="about-card__title">Авторские модели</h3>
+          <p class="about-card__text">Работаем с дизайнерами и небольшими мастерскими. У каждой лампы есть автор и своя история.</p>
+        </article>
+
+        <article class="about-card">
+          <h3 class="about-card__title">Честные материалы</h3>
+          <p class="about-card__text">Камень, дерево, металл и лён. Никакой имитации: материал указан в характеристиках каждой модели.</p>
+        </article>
+
+        <article class="about-card">
+          <h3 class="about-card__title">Забота после покупки</h3>
+          <p class="about-card__text">Гарантия 2 года, 14 дней на возврат и консультация по свету: поможем подобрать лампу под комнату.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="stats-title">
+      <h2 class="section__title" id="stats-title">«Накал» в цифрах</h2>
+
+      <dl class="about-stats">
+        <div class="about-stats__item"><dt class="about-stats__label">Работаем</dt><dd class="about-stats__value">с 2019 года</dd></div>
+        <div class="about-stats__item"><dt class="about-stats__label">Мастерских-партнёров</dt><dd class="about-stats__value">30+</dd></div>
+        <div class="about-stats__item"><dt class="about-stats__label">Выполнено заказов</dt><dd class="about-stats__value">5000+</dd></div>
+        <div class="about-stats__item"><dt class="about-stats__label">Гарантия</dt><dd class="about-stats__value">2 года</dd></div>
+      </dl>
+    </section>
+
+    <section class="section" aria-labelledby="steps-title">
+      <h2 class="section__title" id="steps-title">Как мы выбираем лампы</h2>
+
+      <ol class="about-steps">
+        <li class="about-steps__item"><strong>Отбор мастерской.</strong> Знакомимся с производством и изучаем прежние работы.</li>
+        <li class="about-steps__item"><strong>Проверка материалов и электрики.</strong> Каждая модель проходит проверку на безопасность и качество сборки.</li>
+        <li class="about-steps__item"><strong>Честные фото и описание.</strong> Показываем лампу такой, какая она есть, и указываем реальные размеры.</li>
+        <li class="about-steps__item"><strong>Гарантия и поддержка.</strong> Отвечаем за каждую проданную лампу 2 года.</li>
+      </ol>
+    </section>
+
+    <aside class="aside-info">
+      <h2 class="aside-info__title">Приходите в шоурум</h2>
+      <p class="aside-info__text">
+        В шоуруме на Тверской можно увидеть, как лампы светятся в темноте, и подобрать свет под свой интерьер.
+        <a href="contacts.html">Адрес и график работы</a>.
+      </p>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <section class="site-footer__col site-footer__about" aria-labelledby="footer-about">
+        <h2 class="site-footer__title" id="footer-about">О магазине</h2>
+        <p class="site-footer__text">
+          «Накал» — магазин дизайнерских ламп. Настольные лампы, торшеры и подвесные
+          светильники от независимых мастерских, с доставкой по всей России.
+        </p>
+      </section>
+
+      <nav class="site-footer__col site-footer__nav" aria-labelledby="footer-nav">
+        <h2 class="site-footer__title" id="footer-nav">Навигация</h2>
+        <ul class="site-footer__list">
+          <li><a class="site-footer__link" href="index.html">Главная</a></li>
+          <li><a class="site-footer__link" href="catalog.html">Каталог</a></li>
+          <li><a class="site-footer__link" href="about.html">О нас</a></li>
+          <li><a class="site-footer__link" href="order.html">Заказ</a></li>
+          <li><a class="site-footer__link" href="contacts.html">Контакты</a></li>
+          <li><a class="site-footer__link" href="index.html#delivery">Доставка и гарантия</a></li>
+        </ul>
+      </nav>
+
+      <section class="site-footer__col" aria-labelledby="footer-contacts">
+        <h2 class="site-footer__title" id="footer-contacts">Контакты</h2>
+        <ul class="site-footer__list site-footer__contacts">
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>г. Москва, ул. Тверская, 12, стр. 1</span></li>
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><a class="site-footer__link" href="tel:+79651236769">+7 (965) 123-67-69</a></li>
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Пн–Сб 10:00–21:00, Вс 11:00–20:00</span></li>
+          <li class="site-footer__contact"><svg class="site-footer__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a class="site-footer__link" href="mailto:info@nakal-lamps.ru">info@nakal-lamps.ru</a></li>
+        </ul>
+
+        <ul class="site-footer__social" aria-label="Мы в соцсетях">
+          <li><a class="site-footer__social-link" href="https://max.ru/" target="_blank" rel="noopener" aria-label="Накал в MAX"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 4.6 16.7L21 21l-1.3-4.3A9 9 0 0 0 12 3z"/><path d="M8 15V9l4 4 4-4v6"/></svg></a></li>
+          <li><a class="site-footer__social-link" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Накал на YouTube"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></svg></a></li>
+          <li><a class="site-footer__social-link" href="https://t.me/" target="_blank" rel="noopener" aria-label="Накал в Telegram"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11l6 2.5L11 20l3-4 5 3z"/><path d="m9 13.5 12-9.5"/></svg></a></li>
+        </ul>
+      </section>
+    </div>
+
+    <p class="site-footer__copy">&copy; 2026 «Накал». Магазин дизайнерских ламп. Все права защищены.</p>
+  </footer>
+
+  <a class="to-top" href="#" aria-label="Наверх"><svg class="to-top__icon" viewBox="0 0 40 56" width="40" height="56" aria-hidden="true" focusable="false"><path d="M17.5 3h5L35 27H5z" fill="currentColor"/><path d="M20 27v23M11 52h18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></a>
+
+</body>
+
+</html>

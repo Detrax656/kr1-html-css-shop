@@ -58,6 +58,9 @@
             <a class="site-nav__link site-nav__link--active" aria-current="page" href="catalog.html">Каталог</a>
           </li>
           <li class="site-nav__item">
+            <a class="site-nav__link" href="about.html">О нас</a>
+          </li>
+          <li class="site-nav__item">
             <a class="site-nav__link" href="order.html">Заказ</a>
           </li>
           <li class="site-nav__item">
@@ -166,6 +169,7 @@
         <ul class="site-footer__list">
           <li><a class="site-footer__link" href="index.html">Главная</a></li>
           <li><a class="site-footer__link" href="catalog.html">Каталог</a></li>
+          <li><a class="site-footer__link" href="about.html">О нас</a></li>
           <li><a class="site-footer__link" href="order.html">Заказ</a></li>
           <li><a class="site-footer__link" href="contacts.html">Контакты</a></li>
           <li><a class="site-footer__link" href="index.html#delivery">Доставка и гарантия</a></li>
@@ -193,6 +197,55 @@
   </footer>
 
   <a class="to-top" href="#" aria-label="Наверх"><svg class="to-top__icon" viewBox="0 0 40 56" width="40" height="56" aria-hidden="true" focusable="false"><path d="M17.5 3h5L35 27H5z" fill="currentColor"/><path d="M20 27v23M11 52h18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></a>
+
+  <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
+    <button class="order-dialog__close" type="button" id="close-order-dialog-icon" aria-label="Закрыть окно">&times;</button>
+
+    <h2 class="order-dialog__title" id="order-dialog-title">Быстрый заказ</h2>
+
+    <div class="order-item" id="quick-item"></div>
+
+    <form class="order-form" id="quick-form" action="#" method="post" novalidate>
+      <div class="order-form__group">
+        <label class="order-form__label" for="quick-name">Имя</label>
+        <input class="order-form__input" id="quick-name" name="name" type="text" placeholder="Введите ваше имя"
+          minlength="2" autocomplete="given-name" required>
+      </div>
+
+      <div class="order-form__group">
+        <label class="order-form__label" for="quick-phone">Телефон</label>
+        <input class="order-form__input" id="quick-phone" name="phone" type="tel" inputmode="tel"
+          placeholder="+7 (900) 000-00-00" pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" autocomplete="tel" required>
+        <small class="order-form__hint">Формат: +7 (900) 000-00-00</small>
+      </div>
+
+      <div class="order-form__group">
+        <label class="order-form__label" for="quick-qty">Количество</label>
+        <input class="order-form__input" id="quick-qty" name="quantity" type="number" min="1" max="10" value="1"
+          inputmode="numeric" required>
+      </div>
+
+      <div class="order-form__group order-form__group--wide order-form__group--checkbox">
+        <label class="order-form__label">
+          <input class="order-form__input" id="quick-agreement" name="agreement" type="checkbox" required>
+          Я согласен на обработку данных
+        </label>
+      </div>
+
+      <p class="order-total" id="quick-total" role="status"></p>
+
+      <div class="order-form__actions">
+        <button class="button button--secondary" type="button" id="close-order-dialog">Закрыть</button>
+        <button class="button button--primary" type="submit">Заказать</button>
+      </div>
+
+      <a class="order-dialog__full" id="quick-full" href="order.html">Полное оформление заказа</a>
+    </form>
+
+    <p class="success-message" id="quick-success" role="status" hidden>
+      Спасибо! Заказ принят, менеджер перезвонит вам в течение 15 минут.
+    </p>
+  </dialog>
 
 </body>
 
