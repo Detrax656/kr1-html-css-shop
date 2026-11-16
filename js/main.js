@@ -1,4 +1,127 @@
 /* ===============================
+   0. localStorage: избранное, заказы, профиль
+   =============================== */
+
+const FAVORITES_KEY = 'nakal-favorites';
+const ORDERS_KEY = 'nakal-orders';
+const PROFILE_KEY = 'nakal-profile';
+
+// Функция, которую страница личного кабинета подключает для перерисовки избранного.
+let onFavoritesChange = null;
+
+function readStorage(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (e) {
+    return fallback;
+  }
+}
+
+function writeStorage(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    // localStorage недоступен — данные просто не сохранятся.
+  }
+}
+
+function getFavorites() {
+  return readStorage(FAVORITES_KEY, []);
+}
+
+function isFavorite(id) {
+  return getFavorites().includes(id);
+}
+
+function updateFavoritesCount() {
+  const count = getFavorites().length;
+
+  document.querySelectorAll('[data-favorites-count]').forEach((element) => {
+    element.textContent = count;
+  });
+}
+
+function getOrders() {
+  return readStorage(ORDERS_KEY, []);
+}
+
+function saveOrder(order) {
+  const list = getOrders();
+
+  list.unshift(order);
+  writeStorage(ORDERS_KEY, list);
+}
+
+function createOrderNumber() {
+  return `NK-${String(Date.now()).slice(-6)}`;
+}
+
+function getProfile() {
+  return readStorage(PROFILE_KEY, {});
+}
+
+// Подставляет в форму сохранённые данные профиля: { имя поля формы: ключ профиля }.
+function fillFromProfile(form, fields) {
+  const profile = getProfile();
+
+  Object.entries(fields).forEach(([fieldName, profileKey]) => {
+    const field = form.elements[fieldName];
+
+    if (field && profile[profileKey]) {
+      field.value = profile[profileKey];
+    }
+  });
+}
+
+const HEART_ICON = '<svg class="favorite-button__icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M12 20.5s-8-4.9-8-10.6A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 8 2.9c0 5.7-8 10.6-8 10.6z"/></svg>';
+
+// Переключаем состояние кнопок избранного (на карточках и на странице товара).
+function syncFavoriteButton(button, active) {
+  const label = button.querySelector('.favorite-button__label');
+
+  button.classList.toggle('is-active', active);
+  button.setAttribute('aria-pressed', String(active));
+
+  if (label) {
+    label.textContent = active ? 'В избранном' : 'В избранное';
+  }
+}
+
+document.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-favorite]');
+
+  if (!button) {
+    return;
+  }
+
+  const id = Number(button.dataset.favorite);
+  const wasActive = isFavorite(id);
+  const list = getFavorites().filter((item) => item !== id);
+
+  if (!wasActive) {
+    list.push(id);
+  }
+
+  writeStorage(FAVORITES_KEY, list);
+
+  document.querySelectorAll(`[data-favorite="${id}"]`).forEach((item) => syncFavoriteButton(item, !wasActive));
+
+  // Короткая анимация «прыжка» сердечка.
+  button.classList.remove('favorite-pulse');
+  void button.offsetWidth;
+  button.classList.add('favorite-pulse');
+
+  updateFavoritesCount();
+
+  if (onFavoritesChange) {
+    onFavoritesChange();
+  }
+});
+
+updateFavoritesCount();
+
+/* ===============================
    1. Функции для работы с товарами
    =============================== */
 
@@ -130,6 +253,8 @@ function createProductCard(product, withOrderButton) {
 
   card.innerHTML = `
     ${status.label ? `<span class="product-card__badge">${status.label}</span>` : ''}
+    <button class="favorite-button${isFavorite(product.id) ? ' is-active' : ''}" type="button" data-favorite="${product.id}"
+      aria-pressed="${isFavorite(product.id)}" aria-label="В избранное: ${product.name}">${HEART_ICON}</button>
     <a class="product-card__media" href="${link}" tabindex="-1" aria-hidden="true">
       <img class="product-card__image" src="${image.src}" srcset="${image.srcset}"
         sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
@@ -282,9 +407,13 @@ function createProductPageHtml(product) {
           <p class="product-details__availability${product.inStock ? '' : ' product-details__availability--no'}">
             ${product.inStock ? 'В наличии' : 'Нет в наличии'}
           </p>
-          ${product.inStock
-            ? `<a class="button" href="order.html?id=${product.id}">Оформить заказ</a>`
-            : ''}
+          <div class="product-card__actions">
+            ${product.inStock
+              ? `<a class="button" href="order.html?id=${product.id}">Оформить заказ</a>`
+              : ''}
+            <button class="button button--secondary favorite-button favorite-button--text${isFavorite(product.id) ? ' is-active' : ''}" type="button"
+              data-favorite="${product.id}" aria-pressed="${isFavorite(product.id)}">${HEART_ICON}<span class="favorite-button__label">${isFavorite(product.id) ? 'В избранном' : 'В избранное'}</span></button>
+          </div>
         </div>
       </article>
     </section>
@@ -431,6 +560,7 @@ if (orderDialog) {
     quickProduct = products.find((product) => product.id === Number(button.dataset.id));
 
     quickForm.reset();
+    fillFromProfile(quickForm, { name: 'name', phone: 'phone' });
     quickForm.hidden = false;
     quickSuccess.hidden = true;
     quickFull.href = `order.html?id=${quickProduct.id}`;
@@ -448,6 +578,19 @@ if (orderDialog) {
       return;
     }
 
+    const quantity = readQuantity(quickQty);
+    const number = createOrderNumber();
+
+    saveOrder({
+      number,
+      date: new Date().toLocaleDateString('ru-RU'),
+      product: quickProduct.name,
+      quantity,
+      delivery: 'Быстрый заказ',
+      total: calculateFinalPrice(quickProduct.price, quickProduct.discount) * quantity
+    });
+
+    quickSuccess.textContent = `Спасибо! Заказ № ${number} принят, менеджер перезвонит вам в течение 15 минут.`;
     quickForm.hidden = true;
     quickSuccess.hidden = false;
   });
@@ -499,6 +642,8 @@ if (orderForm) {
     option.disabled = !product.inStock;
     productSelect.append(option);
   });
+
+  fillFromProfile(orderForm, { name: 'name', phone: 'phone', email: 'email', city: 'city' });
 
   const idFromUrl = Number(new URLSearchParams(window.location.search).get('id'));
   const preselected = products.find((product) => product.id === idFromUrl && product.inStock);
@@ -562,12 +707,21 @@ if (orderForm) {
       return;
     }
 
-    const number = `NK-${String(Date.now()).slice(-6)}`;
+    const number = createOrderNumber();
     const way = order.isCourier ? 'Доставим курьером' : 'Заберёте в шоуруме на Тверской, 12';
 
     document.getElementById('order-success-text').textContent =
       `Заказ № ${number}: ${order.product.name} × ${order.quantity}, итого ${formatPrice(order.total)}. ` +
       `${way}. Менеджер свяжется с вами для подтверждения.`;
+
+    saveOrder({
+      number,
+      date: new Date().toLocaleDateString('ru-RU'),
+      product: order.product.name,
+      quantity: order.quantity,
+      delivery: order.isCourier ? 'Курьер' : 'Самовывоз',
+      total: order.total
+    });
 
     orderForm.hidden = true;
     success.hidden = false;
@@ -578,14 +732,181 @@ if (orderForm) {
 }
 
 /* ===============================
-   8. Кнопка «Наверх»
+   8. Личный кабинет
+   =============================== */
+
+const tabs = Array.from(document.querySelectorAll('.tabs__tab'));
+
+if (tabs.length) {
+  const selectTab = (tab) => {
+    tabs.forEach((item) => {
+      const active = item === tab;
+
+      item.setAttribute('aria-selected', String(active));
+      item.tabIndex = active ? 0 : -1;
+      document.getElementById(item.getAttribute('aria-controls')).hidden = !active;
+    });
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => selectTab(tab));
+
+    // Стрелки, Home и End переключают вкладки с клавиатуры.
+    tab.addEventListener('keydown', (event) => {
+      const next = {
+        ArrowRight: tabs[(index + 1) % tabs.length],
+        ArrowLeft: tabs[(index - 1 + tabs.length) % tabs.length],
+        Home: tabs[0],
+        End: tabs[tabs.length - 1]
+      }[event.key];
+
+      if (next) {
+        event.preventDefault();
+        next.focus();
+        selectTab(next);
+      }
+    });
+  });
+
+  // Ссылка account.html#orders открывает нужную вкладку.
+  const fromHash = tabs.find((tab) => tab.id === `tab-${window.location.hash.slice(1)}`);
+  selectTab(fromHash || tabs[0]);
+
+  // Избранное.
+  const favoritesGrid = document.getElementById('favorites-grid');
+  const favoritesEmpty = document.getElementById('favorites-empty');
+
+  onFavoritesChange = () => {
+    const ids = getFavorites();
+    const list = products.filter((product) => ids.includes(product.id));
+
+    favoritesEmpty.hidden = list.length > 0;
+    renderProducts(favoritesGrid, list, false);
+  };
+
+  onFavoritesChange();
+
+  // Заказы.
+  const orders = getOrders();
+
+  document.getElementById('orders-empty').hidden = orders.length > 0;
+  document.getElementById('orders-wrap').hidden = orders.length === 0;
+  document.getElementById('orders-list').innerHTML = orders.map((order) => `
+    <tr>
+      <th class="product-table__cell" scope="row">${order.number}</th>
+      <td class="product-table__cell">${order.date}</td>
+      <td class="product-table__cell">${order.product}</td>
+      <td class="product-table__cell">${order.quantity}</td>
+      <td class="product-table__cell">${order.delivery}</td>
+      <td class="product-table__cell">${formatPrice(order.total)}</td>
+      <td class="product-table__cell">Новый</td>
+    </tr>`).join('');
+
+  // Профиль.
+  const profileForm = document.getElementById('profile-form');
+  const profileSuccess = document.getElementById('profile-success');
+  const profile = getProfile();
+
+  Object.keys(profile).forEach((key) => {
+    const field = profileForm.elements[key];
+
+    if (!field) {
+      return;
+    }
+
+    if (field.type === 'checkbox') {
+      field.checked = Boolean(profile[key]);
+    } else {
+      field.value = profile[key];
+    }
+  });
+
+  profileForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    profileSuccess.hidden = true;
+
+    if (!validateForm(profileForm)) {
+      return;
+    }
+
+    writeStorage(PROFILE_KEY, {
+      name: profileForm.elements.name.value.trim(),
+      email: profileForm.elements.email.value.trim(),
+      phone: profileForm.elements.phone.value.trim(),
+      city: profileForm.elements.city.value.trim(),
+      news: profileForm.elements.news.checked
+    });
+
+    profileSuccess.hidden = false;
+  });
+}
+
+/* ===============================
+   9. Вопрос менеджеру (кнопка чата)
+   =============================== */
+
+const managerDialog = document.getElementById('manager-dialog');
+
+if (managerDialog) {
+  const managerForm = document.getElementById('manager-form');
+  const managerSuccess = document.getElementById('manager-success');
+
+  document.querySelectorAll('[data-open-manager]').forEach((button) => {
+    button.addEventListener('click', () => {
+      managerForm.reset();
+      fillFromProfile(managerForm, { name: 'name', email: 'email' });
+      managerForm.hidden = false;
+      managerSuccess.hidden = true;
+      managerDialog.showModal();
+    });
+  });
+
+  managerForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    if (!validateForm(managerForm)) {
+      return;
+    }
+
+    managerForm.hidden = true;
+    managerSuccess.hidden = false;
+  });
+
+  document.getElementById('close-manager').addEventListener('click', () => managerDialog.close());
+  document.getElementById('close-manager-icon').addEventListener('click', () => managerDialog.close());
+
+  // Закрываем окно по клику на затемнённый фон.
+  managerDialog.addEventListener('click', (event) => {
+    if (event.target !== managerDialog) {
+      return;
+    }
+
+    const rect = managerDialog.getBoundingClientRect();
+
+    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) {
+      managerDialog.close();
+    }
+  });
+}
+
+/* ===============================
+   10. Кнопка «Наверх»
    =============================== */
 
 const toTop = document.querySelector('.to-top');
 
 if (toTop) {
+  const chatButton = document.querySelector('.chat-button');
+
   const updateToTop = () => {
-    toTop.classList.toggle('to-top--hidden', window.scrollY < 300);
+    const scrolled = window.scrollY >= 300;
+
+    toTop.classList.toggle('to-top--hidden', !scrolled);
+
+    // Кнопка чата поднимается над кнопкой «Наверх», когда та появляется.
+    if (chatButton) {
+      chatButton.classList.toggle('chat-button--raised', scrolled);
+    }
   };
 
   window.addEventListener('scroll', updateToTop, { passive: true });

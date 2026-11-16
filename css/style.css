@@ -1132,3 +1132,117 @@ a:focus-visible {
 [hidden] {
   display: none !important;
 }
+
+/* Кнопка «Личный кабинет» в шапке */
+.account-link {
+  font-weight: 600;
+  color: var(--color-on-primary);
+  text-decoration: none;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s;
+}
+
+.account-link:hover {
+  color: var(--color-on-primary);
+  background-color: var(--color-primary-hover);
+  text-decoration: none;
+}
+
+.account-link__count {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-primary);
+  background-color: var(--color-on-primary);
+  border-radius: 999px;
+}
+
+/* Избранное: сердечко на карточке и кнопка на странице товара */
+.favorite-button {
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.favorite-button:hover {
+  border-color: var(--color-primary);
+}
+
+.favorite-button__icon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.favorite-button.is-active {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.favorite-button.is-active .favorite-button__icon {
+  fill: currentColor;
+}
+
+.favorite-pulse .favorite-button__icon {
+  animation: favorite-pulse 0.4s ease-out;
+}
+
+@keyframes favorite-pulse {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35) translateY(-3px); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .favorite-pulse .favorite-button__icon {
+    animation: none;
+  }
+}
+
+/* Вкладки личного кабинета */
+.tabs__list {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tabs__tab {
+  font: inherit;
+  font-weight: 600;
+  color: var(--color-muted);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+}
+
+.tabs__tab:hover {
+  color: var(--color-text);
+}
+
+.tabs__tab[aria-selected="true"] {
+  color: var(--color-text);
+  border-bottom-color: var(--color-primary);
+}
+
+/* Кнопка чата с менеджером */
+.chat-button {
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s, bottom 0.3s;
+}
+
+.chat-button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chat-button {
+    transition: background-color 0.2s;
+  }
+}

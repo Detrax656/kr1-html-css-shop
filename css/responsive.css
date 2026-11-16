@@ -326,6 +326,90 @@ main {
   overflow: auto;
 }
 
+/* Кнопка «Личный кабинет»: на телефоне иконка в правом верхнем углу шапки */
+.account-link {
+  position: absolute;
+  top: var(--space-md);
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: 44px;
+  padding: 0 12px;
+}
+
+.account-link__text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.account-link__count {
+  min-width: 22px;
+  padding: 2px 6px;
+  text-align: center;
+}
+
+/* Избранное и вкладки (мобильные) */
+.favorite-button {
+  position: absolute;
+  top: var(--space-lg);
+  left: var(--space-lg);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.favorite-button--text {
+  position: static;
+  display: inline-flex;
+  gap: var(--space-sm);
+  width: auto;
+  padding: 0 var(--space-md);
+  border-radius: var(--radius-md);
+}
+
+.tabs__list {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+  overflow-x: auto;
+}
+
+.tabs__tab {
+  flex: none;
+  min-height: 44px;
+  padding: 0 var(--space-md);
+}
+
+.account-form {
+  max-width: 720px;
+}
+
+/* Кнопка чата: над кнопкой «Наверх» (когда та видна) */
+.chat-button {
+  position: fixed;
+  right: 14px;
+  bottom: 16px;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+}
+
+.chat-button--raised {
+  bottom: 82px;
+}
+
 /* Оформление заказа (мобильные) */
 .order-form__section {
   display: grid;
@@ -580,6 +664,25 @@ main {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  /* Кнопка кабинета встаёт в строку шапки справа */
+  .account-link {
+    position: static;
+    flex: none;
+  }
+
+  .account-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chat-button {
+    right: 30px;
+    bottom: 32px;
+  }
+
+  .chat-button--raised {
+    bottom: 98px;
+  }
+
   .about-stats {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
@@ -638,6 +741,15 @@ main {
 @media (min-width: 1024px) {
   .map {
     aspect-ratio: 21 / 9;
+  }
+
+  /* На широких экранах у кнопки кабинета появляется текст */
+  .account-link__text {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
   }
 
   /* Лампочка висит ниже: хлебные крошки сдвигаем, чтобы она их не закрывала */
