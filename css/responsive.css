@@ -95,14 +95,14 @@ main {
   flex-wrap: wrap;
   gap: var(--space-xs);
   margin: 0;
-  padding: 0;
+  padding: 0 72px 0 0;   /* справа место под кнопку кабинета */
   list-style: none;
 }
 
 .site-nav__link {
   display: block;
-  padding: 10px 7px;
-  font-size: 15px;
+  padding: 10px 6px;
+  font-size: 14px;
 }
 
 /* ===============================
@@ -326,16 +326,16 @@ main {
   overflow: auto;
 }
 
-/* Кнопка «Личный кабинет»: на телефоне иконка в правом верхнем углу шапки */
+/* Кнопка «Личный кабинет»: на телефоне в правом нижнем углу шапки, в строке меню */
 .account-link {
   position: absolute;
-  top: var(--space-md);
+  bottom: var(--space-md);
   right: 0;
   display: inline-flex;
   align-items: center;
   gap: var(--space-sm);
   min-height: 44px;
-  padding: 0 12px;
+  padding: 0 10px;
 }
 
 .account-link__text {
@@ -603,6 +603,10 @@ main {
 
   .site-nav {
     width: auto;
+  }
+
+  .site-nav__list {
+    padding-right: 0;
   }
 
   .site-nav__link {

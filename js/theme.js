@@ -282,6 +282,36 @@ if (pull) {
     }
   });
 
+  // Тема могла измениться на другой странице или во вкладке: при возврате назад
+  // (кэш страницы в Android/Chrome) и при возвращении к вкладке перечитываем её.
+  function syncTheme() {
+    let saved = null;
+
+    try {
+      saved = localStorage.getItem('theme');
+    } catch (e) {
+      return;
+    }
+
+    if (saved && saved !== root.dataset.theme) {
+      root.dataset.theme = saved;
+    }
+
+    pull.setAttribute('aria-pressed', String(root.dataset.theme === 'light'));
+  }
+
+  window.addEventListener('pageshow', syncTheme);
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'theme') {
+      syncTheme();
+    }
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      syncTheme();
+    }
+  });
+
   pull.setAttribute('aria-pressed', String(root.dataset.theme === 'light'));
   draw();
 

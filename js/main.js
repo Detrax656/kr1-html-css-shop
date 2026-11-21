@@ -161,6 +161,14 @@ function getProductStatus(product) {
   return { key: '', label: '' };
 }
 
+// Краткая сводка по товару: «Название: цена. Статус: …»
+function createProductSummary(product) {
+  const finalPrice = calculateFinalPrice(product.price, product.discount);
+  const status = getProductStatus(product).label || (product.inStock ? 'В наличии' : 'Нет в наличии');
+
+  return `${product.name}: ${formatPrice(finalPrice)}. Статус: ${status}.`;
+}
+
 // Краткое описание
 function getShortDescription(text, maxLength = 100) {
   if (text.length <= maxLength) {
@@ -208,6 +216,7 @@ function logProductReport(list) {
   console.log('Итоговая цена:', formatPrice(calculateFinalPrice(first.price, first.discount)));
   console.log('Статус:', getProductStatus(first).label || 'без статуса');
   console.log('Описание:', getShortDescription(first.description));
+  console.log('Сводка:', createProductSummary(first));
 
   console.table(list.map((product) => ({
     id: product.id,
@@ -470,6 +479,18 @@ function createProductPageHtml(product) {
 }
 
 logProductReport(products);
+
+// Проверочный блок на странице каталога: текст выводится через textContent, не через innerHTML.
+const jsMessage = document.querySelector('.js-message');
+const productOutput = document.querySelector('.product-output');
+
+if (jsMessage) {
+  jsMessage.textContent = 'JavaScript подключён корректно.';
+}
+
+if (productOutput) {
+  productOutput.textContent = createProductSummary(products[0]);
+}
 
 /* ===============================
    5. Заказ: общие функции
@@ -791,16 +812,30 @@ if (tabs.length) {
 
   document.getElementById('orders-empty').hidden = orders.length > 0;
   document.getElementById('orders-wrap').hidden = orders.length === 0;
-  document.getElementById('orders-list').innerHTML = orders.map((order) => `
-    <tr>
-      <th class="product-table__cell" scope="row">${order.number}</th>
-      <td class="product-table__cell">${order.date}</td>
-      <td class="product-table__cell">${order.product}</td>
-      <td class="product-table__cell">${order.quantity}</td>
-      <td class="product-table__cell">${order.delivery}</td>
-      <td class="product-table__cell">${formatPrice(order.total)}</td>
-      <td class="product-table__cell">Новый</td>
-    </tr>`).join('');
+  // Данные заказов лежат в localStorage, поэтому строки таблицы собираем через textContent.
+  const ordersList = document.getElementById('orders-list');
+
+  ordersList.textContent = '';
+
+  orders.forEach((order) => {
+    const row = document.createElement('tr');
+    const values = [order.number, order.date, order.product, order.quantity, order.delivery, formatPrice(order.total), 'Новый'];
+
+    values.forEach((value, index) => {
+      const cell = document.createElement(index === 0 ? 'th' : 'td');
+
+      cell.className = 'product-table__cell';
+      cell.textContent = value;
+
+      if (index === 0) {
+        cell.scope = 'row';
+      }
+
+      row.append(cell);
+    });
+
+    ordersList.append(row);
+  });
 
   // Профиль.
   const profileForm = document.getElementById('profile-form');
